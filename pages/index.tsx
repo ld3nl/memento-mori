@@ -6,7 +6,7 @@ import LifeTable from "../components/LifeTable";
 import styles from "../styles/Home.module.scss";
 
 export default function Home() {
-  const [data, setData] = React.useState();
+  const [data, setData] = React.useState<any>();
 
   React.useEffect(()=> console.warn(data), data);
 
@@ -25,7 +25,7 @@ export default function Home() {
       <main className={styles.main}>
         {!data && <Form dateFunction={(val: any) => setData(val)} />}
 
-        {typeof data  !== undefined && <LifeTable weeksLived={data.age} />}
+        {typeof data  !== undefined && <LifeTable weeksLived={data?.age} />}
       </main>
     </div>
   );
