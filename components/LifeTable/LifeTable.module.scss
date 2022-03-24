@@ -1,0 +1,39 @@
+@import "../../styles/globals.scss";
+// --mm-gutter-x: 1.5rem;
+// --mm-gutter-y: 0;
+// --mm-week-padding: 0.625rem;
+// --mm-font-family: "Arapey", serif;
+
+.momentoMori {
+  --mm-gutter-y: 0;
+  --mm-gutter-x: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(var(--mm-gutter-y) * -1);
+  margin-right: calc(var(--mm-gutter-x) / -2);
+  margin-left: calc(var(--mm-gutter-x) / -2);
+
+  // & > * {
+  //   max-width: 100%;
+  //   padding-right: calc(var(--mm-gutter-x) / 2);
+  //   padding-left: calc(var(--mm-gutter-x) / 2);
+  //   margin-top: var(--mm-gutter-y);
+  // }
+}
+
+.col {
+  --mm-gutter-y: 0;
+  --mm-gutter-x: 1.5rem;
+  --mm-week-padding: 0.625rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  flex: 0 0 auto;
+  /* width: 100%; */
+  width: calc(var(--mm-week-padding) * 2 * 54);
+  margin: auto;
+
+  max-width: 1104px;
+  padding-right: calc(var(--mm-gutter-x) / 2);
+  padding-left: calc(var(--mm-gutter-x) / 2);
+}

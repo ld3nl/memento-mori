@@ -1,0 +1,35 @@
+// .lifeTableCell {
+//   display: block;
+// }
+
+.lifeTableCell {
+  --mm-week-padding: 0.625rem;
+
+  background: white;
+  /* padding: calc(var(--mm-gutter-x) / 2); */
+  /* padding: 5px; */
+  padding: calc(var(--mm-week-padding) / 2);
+
+  border: 1px solid black;
+  margin: calc(var(--mm-week-padding) / 2.5);
+  /* margin: auto; */
+  align-self: self-start;
+
+  &.isActive {
+    background: black;
+  }
+}
+
+.lifeTableCell:nth-child(26n) {
+  margin-right: 1rem;
+}
+
+.lifeTableCell {
+  position: relative;
+
+  @for $i from 1 through 52 {
+    &:nth-child(520n + #{$i}) {
+      margin-top: 1rem;
+    }
+  }
+}
