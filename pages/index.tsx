@@ -25,7 +25,7 @@ export default function Home() {
       <main className={styles.main}>
         {!data && <Form dateFunction={(val: any) => setData(val)} />}
 
-        {data && <LifeTable weeksLived={data.age} />}
+        {typeof data  !== undefined && <LifeTable weeksLived={data.age} />}
       </main>
     </div>
   );
