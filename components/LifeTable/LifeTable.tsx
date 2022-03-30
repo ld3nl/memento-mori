@@ -6,15 +6,15 @@ import css from "./LifeTable.module.scss";
 type Props = {
   className?: string;
   weeksLived?: number;
+  yearOfBirth?: string;
 };
 
 const LifeTable: React.FunctionComponent<Props> = ({
   className,
   weeksLived,
+  yearOfBirth,
 }) => {
   if (!weeksLived) return <>Loading...</>;
-
-  console.log(weeksLived);
 
   const newArr = [];
 
@@ -24,13 +24,15 @@ const LifeTable: React.FunctionComponent<Props> = ({
         // className={[css.btn, css["btn-link"]].join(" ")}
         key={`LifeTableCell-key-${i}`}
         // disabled={i !== weeksLived / 52}
+        latestWeek={Math.trunc(weeksLived) === i && weeksLived % 1 * 100}
         isActive={weeksLived > i}
         year={(i + 1) / 52}
-        fullYear={ (Number(new Date().getFullYear()) - ((i + 1) / 52))}
+        fullYear={ (Number(yearOfBirth) + ((i + 1) / 52) )}
       />
     );
   }
 
+  var style = { "--partialWeek": `${weeksLived % 1 * 100}%` } as React.CSSProperties;
   return (
     <>
       <header className="py-5 d-flex flex-column">
@@ -41,8 +43,7 @@ const LifeTable: React.FunctionComponent<Props> = ({
           MEMENTO MORI
         </h1>
       </header>
-      <h1>{weeksLived}</h1>
-      <div className={[css.momentoMori, "row"].join(" ")}>
+      <div className={[css.momentoMori, "row"].join(" ")} style={style}>
         <div className={[css.col, ""].join(" ")}>{newArr}</div>
       </div>
       <footer>

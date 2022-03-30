@@ -8,7 +8,7 @@ import styles from "../styles/Home.module.scss";
 export default function Home() {
   const [data, setData] = React.useState<any>();
 
-  React.useEffect(()=> console.warn(data), data);
+  React.useEffect(()=> console.warn('data', data?.date), data);
 
   return (
     <div className={styles.container}>
@@ -25,7 +25,7 @@ export default function Home() {
       <main className={styles.main}>
         {!data && <Form dateFunction={(val: any) => setData(val)} />}
 
-        {typeof data  !== undefined && <LifeTable weeksLived={data?.age} />}
+        {typeof data  !== undefined && <LifeTable weeksLived={data?.age} yearOfBirth={data?.date?.split('-')[0]} />}
       </main>
     </div>
   );

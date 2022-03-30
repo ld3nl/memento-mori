@@ -32,4 +32,27 @@
       margin-top: 1rem;
     }
   }
+
+  &[data-year-index]::before {
+    content: attr(data-year-index) " ";
+    position: absolute;
+    right: -40px;
+    top: 1px;
+    display: none;
+  }
+  
+  &[data-year-index="1"]::before {
+    display: block;
+  }
+  
+  @for $i from 1 through 80 {
+    &[data-year-index="#{$i * 5}"]::before {
+      display: block;
+    }
+  }
+}
+
+.lifeTableCell.latestWeek {
+  // background: linear-gradient(to bottom left, cyan var(--partialWeek), palegoldenrod 10%);
+  background: linear-gradient(135deg, black var(--partialWeek), white);
 }
