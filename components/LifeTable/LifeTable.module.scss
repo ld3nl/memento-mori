@@ -38,3 +38,26 @@
   padding-left: calc(var(--mm-gutter-x) / 2);
 }
 
+
+.quoteBlock{
+  blockquote {
+    text-indent: -0.45em;
+    
+    &::before {
+        content: open-quote;
+    }
+    &::after {
+        content: close-quote;
+    }
+
+    quotes: "“" "”" "‘" "’";
+  }
+
+  @supports ( hanging-punctuation: first) {
+    blockquote {
+      text-indent: 0;
+      hanging-punctuation: first;
+    }
+  }
+
+}

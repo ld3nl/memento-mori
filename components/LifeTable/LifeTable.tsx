@@ -47,7 +47,7 @@ const LifeTable: React.FunctionComponent<Props> = ({
         <div className={[css.col, ""].join(" ")}>{newArr}</div>
       </div>
       <footer>
-        <figure className="p-5">
+        <figure className={css.quoteBlock}>
           <blockquote>
             <p>
               It is not that we have a short time to live, but that we waste a
@@ -56,7 +56,7 @@ const LifeTable: React.FunctionComponent<Props> = ({
               well invested.
             </p>
           </blockquote>
-          <figcaption className={"mt-3"}>
+          <figcaption>
             <footer>
               ― <cite title="Source Title">Seneca</cite>
             </footer>
