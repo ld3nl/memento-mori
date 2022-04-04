@@ -64,7 +64,7 @@
   }
 
   figcaption{
-    min-width: 50%;
+    min-width: calc(50% + 16px);
     max-width: 340px;
     margin: auto;
   }
