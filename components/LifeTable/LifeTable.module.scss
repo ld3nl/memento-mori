@@ -42,7 +42,10 @@
 .quoteBlock{
   blockquote {
     text-indent: -0.45em;
-    
+    min-width: 50%;
+    max-width: 340px;
+    margin: auto;
+
     &::before {
         content: open-quote;
     }
@@ -58,6 +61,12 @@
       text-indent: 0;
       hanging-punctuation: first;
     }
+  }
+
+  figcaption{
+    min-width: 50%;
+    max-width: 340px;
+    margin: auto;
   }
 
 }
