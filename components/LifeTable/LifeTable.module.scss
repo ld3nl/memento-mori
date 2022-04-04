@@ -48,6 +48,7 @@
 
     &::before {
         content: open-quote;
+        font-size: 4rem;
     }
     &::after {
         content: close-quote;
@@ -64,7 +65,8 @@
   }
 
   figcaption{
-    min-width: calc(50% + 16px);
+    margin-top: 2rem;
+    min-width: calc(50% + 32px);
     max-width: 340px;
     margin: auto;
   }
