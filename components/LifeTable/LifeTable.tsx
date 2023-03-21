@@ -10,34 +10,29 @@ type Props = {
 };
 
 const LifeTable: React.FunctionComponent<Props> = ({
-  className,
-  weeksLived,
-  yearOfBirth,
+  className = "",
+  weeksLived = 0,
+  yearOfBirth = "",
 }) => {
   if (!weeksLived) return <>Loading...</>;
 
-  const newArr = [];
+  const newArr = Array.from({ length: 4160 }, (_, i) => (
+    <LifeTableCell
+      key={`LifeTableCell-key-${i}`}
+      latestWeek={Math.trunc(weeksLived) === i && (weeksLived % 1) * 100}
+      isActive={i < weeksLived}
+      year={(i + 1) / 52}
+      fullYear={Number(yearOfBirth) + (i + 1) / 52}
+    />
+  ));
 
-  for (let i = 0; i < 4160; i++) {
-    newArr.push(
-      <LifeTableCell
-        // className={[css.btn, css["btn-link"]].join(" ")}
-        key={`LifeTableCell-key-${i}`}
-        // disabled={i !== weeksLived / 52}
-        latestWeek={Math.trunc(weeksLived) === i && weeksLived % 1 * 100}
-        isActive={weeksLived > i}
-        year={(i + 1) / 52}
-        fullYear={ (Number(yearOfBirth) + ((i + 1) / 52) )}
-      />
-    );
-  }
-
-  var style = { "--partialWeek": `${weeksLived % 1 * 100}%` } as React.CSSProperties;
+  var style = {
+    "--partialWeek": `${(weeksLived % 1) * 100}%`,
+  } as React.CSSProperties;
   return (
     <>
-      <header className="py-5 d-flex flex-column">
+      <header className={css.header}>
         <h1
-          className={"text-center"}
           title={`Memento mori (Latin for 'remember that you [have to] die')`}
         >
           MEMENTO MORI
@@ -49,10 +44,10 @@ const LifeTable: React.FunctionComponent<Props> = ({
       <footer>
         <figure className={css.quoteBlock}>
           <blockquote>
-              It is not that we have a short time to live, but that we waste a
-              lot of it. Life is long enough, and a sufficiently generous amount
-              has been given to us for the highest achievements if it were all
-              well invested.
+            It is not that we have a short time to live, but that we waste a lot
+            of it. Life is long enough, and a sufficiently generous amount has
+            been given to us for the highest achievements if it were all well
+            invested.
           </blockquote>
           <figcaption>
             <footer>

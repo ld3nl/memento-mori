@@ -7,8 +7,24 @@ import styles from "../styles/Home.module.scss";
 
 export default function Home() {
   const [data, setData] = React.useState<any>();
+  const [weeksLived, setWeeksLived] = React.useState<any>(null);
 
-  React.useEffect(()=> console.warn('data', data?.date), data);
+  React.useEffect(() => {
+    const calcWeeksLived = (dateOfBirth: string) => {
+      const birthDate = new Date(dateOfBirth);
+      const today = new Date();
+      const oneWeekInMs = 7 * 24 * 60 * 60 * 1000; // milliseconds in a week
+
+      const ageInMs = today.getTime() - birthDate.getTime();
+      const ageInWeeks = Math.floor(ageInMs / oneWeekInMs);
+
+      return ageInWeeks;
+    };
+
+    setWeeksLived(calcWeeksLived(data?.date));
+  }, [data?.date]);
+
+  React.useEffect(() => console.warn("data", data?.date), data);
 
   return (
     <div className={styles.container}>
@@ -24,8 +40,12 @@ export default function Home() {
 
       <main className={styles.main}>
         {!data && <Form dateFunction={(val: any) => setData(val)} />}
-
-        {typeof data  !== undefined && <LifeTable weeksLived={data?.age} yearOfBirth={data?.date?.split('-')[0]} />}
+        {typeof data !== undefined && (
+          <LifeTable
+            weeksLived={weeksLived}
+            yearOfBirth={data?.date?.split("-")[0]}
+          />
+        )}
       </main>
     </div>
   );

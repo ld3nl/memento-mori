@@ -11,21 +11,12 @@ type Props = {
 const Form: React.FunctionComponent<Props> = ({ className, dateFunction }) => {
   const router = useRouter();
 
-  const savedName: string =
-    (typeof window !== "undefined" &&
-      window.localStorage.getItem("savedName")) ||
-    "";
-  const savedAge: string =
-    (typeof window !== "undefined" &&
-      window.localStorage.getItem("savedAge")) ||
-    "";
-  const savedDate: boolean = Boolean(
-    (typeof window !== "undefined" &&
-      window.localStorage.getItem("savedDate")) ||
-      false
+  const savedDate = Boolean(
+    typeof window !== "undefined" && window.localStorage.getItem("savedDate")
   );
 
   const [saveData, setSaveData] = React.useState<boolean>(savedDate);
+
   const [allSet, setAllSet] = React.useState<boolean>(false);
 
   const [name, setName] = React.useState<any>();
@@ -33,12 +24,13 @@ const Form: React.FunctionComponent<Props> = ({ className, dateFunction }) => {
   const [age, setAge] = React.useState<any>();
 
   React.useEffect(() => {
-    if (!name && !date) return;
+    if (!name || !date) return;
+
     router.push({
       pathname: "/",
-      query: { name: name, date: date },
+      query: { name, date },
     });
-  }, [name, date]);
+  }, [name, date, router]);
 
   React.useEffect(() => {
     if (!date) return;
@@ -52,26 +44,22 @@ const Form: React.FunctionComponent<Props> = ({ className, dateFunction }) => {
   }, [router]);
 
   React.useEffect(() => {
-    if (allSet && saveData) {
-      window.localStorage.setItem("savedName", name);
-      window.localStorage.setItem("savedAge", date);
-      window.localStorage.setItem("savedDate", String(saveData));
-    }
+    if (!allSet) return;
 
-    if (!saveData) {
-      window.localStorage.setItem("savedName", "");
-      window.localStorage.setItem("savedDate", "");
-    }
-  }, [allSet]);
+    const savedName = saveData ? name : "";
+    const savedAge = saveData ? date : "";
+    const savedDate = String(saveData);
+
+    localStorage.setItem("savedName", savedName);
+    localStorage.setItem("savedAge", savedAge);
+    localStorage.setItem("savedDate", savedDate);
+  }, [allSet, saveData, name, date]);
 
   const calculateAge = (dob: Date) => {
-    var diff_ms:number = Date.now() - new Date(dob).getTime();
+    var diff_ms: number = Date.now() - new Date(dob).getTime();
 
-    // var age_dt = new Date(diff_ms);
+    const diffWeek = diff_ms / (24 * 3600 * 1000 * 7);
 
-    const diffWeek = (diff_ms / (24*3600*1000*7));
-
-    // return Math.abs(age_dt.getUTCFullYear() - 1970);
     return diffWeek;
   };
 
@@ -81,17 +69,12 @@ const Form: React.FunctionComponent<Props> = ({ className, dateFunction }) => {
   return (
     <div
       key={"Date and Name Form"}
-      className={[
-        css.form,
-        "d-flex flex-column  min-vh-100 min-vw-100",
-        className || "",
-      ].join(" ")}
+      className={[css.form, className || ""].join(" ")}
     >
-      <h1 className="h3 m-auto mb-3 fw-normal">Enter Your Date Of Birth</h1>
-      <form className={"m-auto mt-1 w-50"}>
-        <div className="form-floating mb-3">
+      <h1>Enter Your Date Of Birth</h1>
+      <form>
+        <div>
           <input
-            className="form-control fs-2"
             type="text"
             id="name"
             name="name"
@@ -102,9 +85,8 @@ const Form: React.FunctionComponent<Props> = ({ className, dateFunction }) => {
           />
           <label htmlFor="name">Name:</label>
         </div>
-        <div className="form-floating">
+        <div>
           <input
-            className="form-control fs-2"
             type="date"
             id="birthday"
             name="birthday"
@@ -117,7 +99,7 @@ const Form: React.FunctionComponent<Props> = ({ className, dateFunction }) => {
           <label htmlFor="birthday">Birthday:</label>
         </div>
 
-        <div className="checkbox mt-3 mb-3">
+        <div>
           <label>
             <input
               type="checkbox"
@@ -130,13 +112,10 @@ const Form: React.FunctionComponent<Props> = ({ className, dateFunction }) => {
         </div>
         <span
           // disabled={age === 0}
-          className={[css.btn, "w-100 btn btn-lg btn-primary mt-2 d-flex"].join(
-            " "
-          )}
+          className={[css.btn].join(" ")}
           onClick={() => {
             setAllSet(true);
-            // setShowExportBtn(true);
-            transferParam({'age': age, 'date': date});
+            transferParam({ age: age, date: date });
           }}
         >
           Is your Age is {age}?
