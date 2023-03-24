@@ -33,7 +33,7 @@ export default function Home({ data }: Props) {
         <title>Visualize Your Life in Weeks | Unlock Your True Potential</title>
         <meta
           name="description"
-          content="Unlock your true potential by visualizing your life in weeks. Use this interactive tool to fill in a new square with each passing week and experience improved focus, a heightened perspective on life, and a rush of motivation to take consistent action."
+          content="If you're looking to unlock your true potential and make the most of your time, why not try visualizing your life in weeks? Our interactive tool is designed to help you do just that. With each passing week, you can fill in a new square and experience a range of benefits, including improved focus, a heightened perspective on life, and a rush of motivation to take consistent action. It's a powerful way to stay on track and make the most of every moment. So why wait? Start visualizing your life in weeks today with our easy-to-use tool."
         />
         <meta
           name="keywords"
