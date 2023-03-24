@@ -7,4 +7,5 @@ module.exports = {
       localIdentName: "[local]__[hash:base64:5]",
     },
   },
+  webpack5: false,
 }
