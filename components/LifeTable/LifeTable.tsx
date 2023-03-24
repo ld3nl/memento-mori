@@ -7,12 +7,14 @@ type Props = {
   className?: string;
   weeksLived?: number;
   yearOfBirth?: string;
+  quote?: any;
 };
 
 const LifeTable: React.FunctionComponent<Props> = ({
   className = "",
   weeksLived = 0,
   yearOfBirth = "",
+  quote,
 }) => {
   if (!weeksLived) return <>Loading...</>;
 
@@ -42,19 +44,16 @@ const LifeTable: React.FunctionComponent<Props> = ({
         <div className={[css.col, ""].join(" ")}>{newArr}</div>
       </div>
       <footer>
-        <figure className={css.quoteBlock}>
-          <blockquote>
-            It is not that we have a short time to live, but that we waste a lot
-            of it. Life is long enough, and a sufficiently generous amount has
-            been given to us for the highest achievements if it were all well
-            invested.
-          </blockquote>
-          <figcaption>
-            <footer>
-              ― <cite title="Source Title">Seneca</cite>
-            </footer>
-          </figcaption>
-        </figure>
+        {quote && (
+          <figure className={css.quoteBlock}>
+            <blockquote>{quote.quote}</blockquote>
+            <figcaption>
+              <footer>
+                ― <cite title="Source Title">{quote.author}</cite>
+              </footer>
+            </figcaption>
+          </figure>
+        )}
       </footer>
     </>
   );

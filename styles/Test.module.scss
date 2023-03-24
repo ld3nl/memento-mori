@@ -1,0 +1,92 @@
+// // Set the width and height of the square divs
+// $square-size: 1vw;
+
+// // Set the number of rows and columns
+// $num-rows: 80;
+// $num-cols: 52;
+
+// // Calculate the width and height of the container based on the number of rows and columns and the size of the square divs
+// $container-width: $num-cols * $square-size;
+// $container-height: $num-rows * $square-size;
+
+// // Calculate the horizontal and vertical spacing between the divs based on the remaining space in the container
+// $horizontal-spacing: calc(100vw - #{$container-width}) / ($num-cols - 1);
+// $vertical-spacing: calc(100vh - #{$container-height}) / ($num-rows - 1);
+
+// // Define the styles for the square divs
+// .square {
+//   width: $square-size;
+//   height: $square-size;
+//   display: inline-block;
+
+//   // Set the margin to create the horizontal and vertical spacing
+//   margin: calc(#{$vertical-spacing / 2}) calc(#{$horizontal-spacing / 2});
+// }
+
+// // Create a container to hold all the square divs and set its width and height
+// .container {
+//   width: 100vw;
+//   height: #{$container-height};
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
+
+//   // Add the square divs to the container
+//   @for $i from 1 through $num-rows * $num-cols {
+//     .square:nth-of-type(#{$i}) {
+//       background-color: blue;
+//     }
+//   }
+// }
+
+.container {
+  --num-rows: 80;
+  --num-cols: 52;
+  --square-size: 10px;
+  --container-width: calc(var(--num-cols) * var(--square-size));
+  --container-height: calc(var(--num-rows) * var(--square-size));
+
+  //   height: var(--container-height);
+  display: grid;
+  grid-template-columns: repeat(52, 1fr); /* 52 columns */
+  grid-template-rows: repeat(80, 1fr); /* 80 rows */
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+}
+
+.square {
+  width: calc(98vh / 80);
+  height: calc(98vh / 80);
+  display: inline-block;
+  background-color: rebeccapurple;
+
+  // Set the margin to create the horizontal and vertical spacing
+  //   margin: calc(#{$vertical-spacing / 2}) calc(#{$horizontal-spacing / 2});
+  margin: 1px;
+
+  &:nth-of-type(26n) {
+    margin-right: 4vh;
+  }
+
+  &:nth-of-type(52n) {
+    margin-right: 0;
+  }
+
+  @for $i from 1 through 52 {
+    &:nth-child(520n + #{$i}) {
+      // margin: 12px;
+      grid-row: span 2; /* take up 52 rows */
+      //   grid-row-gap: 50px;
+      //   grid-column-gap: 50px;
+    }
+
+    &:nth-child(0n + #{$i}) {
+      grid-row: span 1;
+    }
+  }
+
+  //   &:nth-child(520n + 1) {
+  //     margin-top: 10px;
+  //     grid-row: span 52; /* take up 52 rows */
+  //   }
+}
