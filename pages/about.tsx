@@ -53,10 +53,10 @@ const About: React.FC<Props> = ({ title }) => {
           From Seneca to Steve Jobs, Leo Tolstoy to Charles Darwin, high
           achieving individuals have used a hyperawareness of their mortality to
           accomplish more and live better. Being aware of your mortality may
-          sound scary, but it’s an extremely effective catalyst for reflection
-          and change. It puts all the things that don’t matter into perspective,
-          melts away fears, and clears a path for you to focus on what's truly
-          important.
+          sound scary, but it&apos;s an extremely effective catalyst for
+          reflection and change. It puts all the things that don&apos;t matter
+          into perspective, melts away fears, and clears a path for you to focus
+          on what's truly important.
         </p>
 
         <p>
