@@ -37,11 +37,11 @@ const About: React.FC<Props> = ({ title }) => {
           Welcome to the Memento Mori Table Online App, where you can visualize
           your life in weeks and unlock your true potential with just a few
           clicks. All you need to do is access the page and enter your birth
-          date - it's that simple.
+          date - it&apos;s that simple.
         </p>
 
         <p>
-          By marking off each week on the table, you'll quickly experience
+          By marking off each week on the table, you&apos;ll quickly experience
           improved focus, a heightened perspective on life, and a rush of
           motivation to take consistent action. This tool is designed as an
           interactive way to help you harness the powerful concept of Memento
@@ -56,7 +56,7 @@ const About: React.FC<Props> = ({ title }) => {
           sound scary, but it&apos;s an extremely effective catalyst for
           reflection and change. It puts all the things that don&apos;t matter
           into perspective, melts away fears, and clears a path for you to focus
-          on what's truly important.
+          on what&apos;s truly important.
         </p>
 
         <p>
