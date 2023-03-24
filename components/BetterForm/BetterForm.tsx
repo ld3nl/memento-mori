@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import MaskedInput from "react-text-mask";
-import ReactInputDateMask from "react-input-date-mask";
 
 import enAU from "date-fns/locale/en-AU";
 registerLocale("enAU", enAU);
@@ -47,9 +46,6 @@ const BetterForm: React.FunctionComponent<Props> = ({
   }, [save]);
 
   useEffect(() => {
-    // const { ageLived, livedWeeksAndDays } = calculateAgeAndLivedWeeksAndDays(
-    //   startDateLocalStorage
-    // );
     setAge(calculateAgeAndLivedWeeksAndDays(startDateLocalStorage));
   }, [startDateLocalStorage]);
 
