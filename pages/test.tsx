@@ -11,7 +11,7 @@ const TEst: React.FC<Props> = ({ title }) => {
   React.useEffect(() => {
     const weeks = Array.from({ length: 4160 }, (_, i) => (
       // const weeks = Array.from({ length: 4160 }, (_, i) => (
-      <div className={styles.square}></div>
+      <div className={styles.square} key={`sq-${i}`}></div>
     ));
 
     setWeeksState(weeks);

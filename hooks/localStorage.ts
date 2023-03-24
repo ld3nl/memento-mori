@@ -14,8 +14,11 @@ export function useLocalStorage<T>(
   const [storedValue, setStoredValue] = useLocalStorage
     ? useState<T>(() => {
         try {
-          const item = window?.localStorage?.getItem(key);
-          return item ? JSON.parse(item) : initialValue;
+          if (typeof window !== "undefined") {
+            const item = window?.localStorage?.getItem(key);
+            return item ? JSON.parse(item) : initialValue;
+          }
+          return null;
         } catch (error) {
           console.error(error);
           return initialValue;
@@ -29,7 +32,9 @@ export function useLocalStorage<T>(
         value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
       if (useLocalStorage) {
-        window?.localStorage?.setItem(key, JSON.stringify(valueToStore));
+        if (typeof window !== "undefined") {
+          window?.localStorage?.setItem(key, JSON.stringify(valueToStore));
+        }
       }
     } catch (error) {
       console.error(error);
@@ -51,8 +56,11 @@ export function useSessionStorage<T>(
   const [storedValue, setStoredValue] = useSessionStorage
     ? useState<T>(() => {
         try {
-          const item = window?.sessionStorage?.getItem(key);
-          return item ? JSON.parse(item) : initialValue;
+          if (typeof window !== "undefined") {
+            const item = window?.sessionStorage?.getItem(key);
+            return item ? JSON.parse(item) : initialValue;
+          }
+          return null;
         } catch (error) {
           console.error(error);
           return initialValue;
@@ -66,7 +74,9 @@ export function useSessionStorage<T>(
         value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
       if (useSessionStorage) {
-        window?.sessionStorage?.setItem(key, JSON.stringify(valueToStore));
+        if (typeof window !== "undefined") {
+          window?.sessionStorage?.setItem(key, JSON.stringify(valueToStore));
+        }
       }
     } catch (error) {
       console.error(error);
