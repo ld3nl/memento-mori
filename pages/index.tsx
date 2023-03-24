@@ -6,6 +6,7 @@ import path from "path";
 import BetterForm from "../components/BetterForm";
 import LifeTable from "../components/LifeTable";
 import styles from "../styles/Home.module.scss";
+import Nav from "@/components/Nav";
 
 interface Props {
   data: [
@@ -62,6 +63,7 @@ export default function Home({ data }: Props) {
           />
         )}
       </main>
+      <Nav />
     </div>
   );
 }

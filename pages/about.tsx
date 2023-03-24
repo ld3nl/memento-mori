@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import Nav from "@/components/Nav";
 // import styles from "../styles/Test.module.scss";
 
 interface Props {
@@ -65,6 +66,8 @@ const About: React.FC<Props> = ({ title }) => {
           give you the motivation and drive to take action week after week. Give
           it a try and see how it can improve your life too!
         </p>
+
+        <Nav />
       </div>
     </>
   );
