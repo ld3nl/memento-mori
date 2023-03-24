@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
-const generateSitemap = require("./next-sitemap");
+const generateSitemap = require("./next-sitemap").default;
+
 
 const nextConfig = {
   reactStrictMode: true,

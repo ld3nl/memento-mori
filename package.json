@@ -24,8 +24,10 @@
     "react-text-mask": "^5.5.0",
     "sass": "^1.59.3",
     "sass-loader": "^12.1.0",
+    "sitemap": "^7.1.1",
     "typescript": "5.0.2",
-    "webpack": "^5.76.2"
+    "webpack": "^5.76.2",
+    "zlib": "^1.0.5"
   },
   "devDependencies": {
     "@next/env": "^13.2.4"
