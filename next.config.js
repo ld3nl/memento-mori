@@ -1,4 +1,5 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
   cssModules: true,
   cssLoaderOptions: {
@@ -9,3 +10,5 @@ module.exports = {
   },
   webpack5: false,
 }
+
+module.exports = nextConfig

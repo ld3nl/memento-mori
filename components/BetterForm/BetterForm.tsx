@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
+
 import MaskedInput from "react-text-mask";
 
 import enAU from "date-fns/locale/en-AU";
@@ -24,6 +25,7 @@ const BetterForm: React.FunctionComponent<Props> = ({
   dateFunction,
 }) => {
   const [age, setAge] = useState<any>();
+  const [weeks, setWeeks] = useState<any>();
 
   const [startDateLocalStorage, setStartDateNew] = useLocalStorage(
     "date",
@@ -47,6 +49,7 @@ const BetterForm: React.FunctionComponent<Props> = ({
 
   useEffect(() => {
     setAge(calculateAgeAndLivedWeeksAndDays(startDateLocalStorage));
+    setWeeks(calculateWeeksSinceBirth(startDateLocalStorage));
   }, [startDateLocalStorage]);
 
   return (
@@ -77,7 +80,6 @@ const BetterForm: React.FunctionComponent<Props> = ({
       </div>
       <div className={css.formItem}>
         <label htmlFor="date">Date of birth</label>
-
         <DatePicker
           id="date"
           selected={new Date(startDateLocalStorage)}
@@ -124,7 +126,7 @@ const BetterForm: React.FunctionComponent<Props> = ({
         </label>
       </div>
       <div className={css["lead"]}>
-        {calculateWeeksSinceBirth(startDateLocalStorage)} weeks lived
+        {weeks} weeks lived
         <hr />
         {age?.ageLived ? `You are: ${age?.ageLived} young` : ""}
       </div>
@@ -132,7 +134,7 @@ const BetterForm: React.FunctionComponent<Props> = ({
         className={css.cta}
         onClick={() => {
           transferParam({
-            weeks: calculateWeeksSinceBirth(startDateLocalStorage),
+            weeks: weeks,
           });
         }}
       >
