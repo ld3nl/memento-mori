@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const generateSitemap = require("./next-sitemap").default;
-
 
 const nextConfig = {
   reactStrictMode: true,
@@ -11,20 +9,7 @@ const nextConfig = {
       localIdentName: "[local]__[hash:base64:5]",
     },
   },
-  webpack5: false,
-  async rewrites() {
-    return [
-      {
-        source: "/sitemap.xml",
-        destination: "/api/sitemap",
-      },
-    ];
-  },
-  async exportPathMap() {
-    const sitemap = await generateSitemap();
-    fs.writeFileSync("./public/sitemap.xml", sitemap);
-    return {};
-  },  
+  webpack5: false
 }
 
 module.exports = nextConfig

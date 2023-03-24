@@ -10,17 +10,14 @@ specifiers:
   eslint-config-next: 13.2.4
   fs: 0.0.1-security
   next: 13.2.4
-  next-sitemap: ^4.0.6
   react: 18.2.0
   react-datepicker: ^4.10.0
   react-dom: 18.2.0
   react-text-mask: ^5.5.0
   sass: ^1.59.3
   sass-loader: ^12.1.0
-  sitemap: ^7.1.1
   typescript: 5.0.2
   webpack: ^5.76.2
-  zlib: ^1.0.5
 
 dependencies:
   '@types/node': 18.15.6
@@ -31,17 +28,14 @@ dependencies:
   eslint-config-next: 13.2.4_j4766f7ecgqbon3u7zlxn5zszu
   fs: 0.0.1-security
   next: 13.2.4_5y7qh6ykubtj2qr2evk3di7hpa
-  next-sitemap: 4.0.6_jccvrrmb7rb3yyi3af3znueaea
   react: 18.2.0
   react-datepicker: 4.10.0_biqbaboplfbrettd7655fr4n2y
   react-dom: 18.2.0_react@18.2.0
   react-text-mask: 5.5.0_react@18.2.0
   sass: 1.60.0
   sass-loader: 12.6.0_sass@1.60.0+webpack@5.76.3
-  sitemap: 7.1.1
   typescript: 5.0.2
   webpack: 5.76.3
-  zlib: 1.0.5
 
 devDependencies:
   '@next/env': 13.2.4
@@ -53,10 +47,6 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.11
-    dev: false
-
-  /@corex/deepmerge/4.0.37:
-    resolution: {integrity: sha512-PX90bEnrLdxd5e6rSFWsghExMuSw0Uov3fWJuuaoFuUQIS/446diu/4seExK5b+43L+SOBbd2uBGwYUkG1JfCw==}
     dev: false
 
   /@eslint-community/eslint-utils/4.4.0_eslint@8.36.0:
@@ -352,10 +342,6 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: false
 
-  /@types/node/17.0.45:
-    resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
-    dev: false
-
   /@types/node/18.15.6:
     resolution: {integrity: sha512-YErOafCZpK4g+Rp3Q/PBgZNAsWKGunQTm9FA3/Pbcm0VCriTEzcrutQ/SxSc0rytAp0NoFWue669jmKhEtd0sA==}
     dev: false
@@ -376,12 +362,6 @@ packages:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3
       csstype: 3.1.1
-    dev: false
-
-  /@types/sax/1.2.4:
-    resolution: {integrity: sha512-pSAff4IAxJjfAXUG6tFkO7dsSbTmf8CtUpfhhZ5VhkRpC4628tJhh3+V6H1E+/Gs9piSzYKT5yzHO5M4GG9jkw==}
-    dependencies:
-      '@types/node': 18.15.6
     dev: false
 
   /@types/scheduler/0.16.3:
@@ -621,10 +601,6 @@ packages:
     dependencies:
       normalize-path: 3.0.0
       picomatch: 2.3.1
-    dev: false
-
-  /arg/5.0.2:
-    resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
     dev: false
 
   /argparse/2.0.1:
@@ -1963,20 +1939,6 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: false
 
-  /next-sitemap/4.0.6_jccvrrmb7rb3yyi3af3znueaea:
-    resolution: {integrity: sha512-pZ9tynYe6mRR189qZqcOlWVgM1Gxo07BJQW0AjerKmLwQOt+6FQMdaDgifgCt6jDT3Y3EG/+NUDDZRcd0gbPkA==}
-    engines: {node: '>=14.18'}
-    hasBin: true
-    peerDependencies:
-      '@next/env': '*'
-      next: '*'
-    dependencies:
-      '@corex/deepmerge': 4.0.37
-      '@next/env': 13.2.4
-      minimist: 1.2.8
-      next: 13.2.4_5y7qh6ykubtj2qr2evk3di7hpa
-    dev: false
-
   /next/13.2.4_5y7qh6ykubtj2qr2evk3di7hpa:
     resolution: {integrity: sha512-g1I30317cThkEpvzfXujf0O4wtaQHtDCLhlivwlTJ885Ld+eOgcz7r3TGQzeU+cSRoNHtD8tsJgzxVdYojFssw==}
     engines: {node: '>=14.6.0'}
@@ -2400,10 +2362,6 @@ packages:
       source-map-js: 1.0.2
     dev: false
 
-  /sax/1.2.4:
-    resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
-    dev: false
-
   /scheduler/0.23.0:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
@@ -2456,17 +2414,6 @@ packages:
       call-bind: 1.0.2
       get-intrinsic: 1.2.0
       object-inspect: 1.12.3
-    dev: false
-
-  /sitemap/7.1.1:
-    resolution: {integrity: sha512-mK3aFtjz4VdJN0igpIJrinf3EO8U8mxOPsTBzSsy06UtjZQJ3YY3o3Xa7zSc5nMqcMrRwlChHZ18Kxg0caiPBg==}
-    engines: {node: '>=12.0.0', npm: '>=5.6.0'}
-    hasBin: true
-    dependencies:
-      '@types/node': 17.0.45
-      '@types/sax': 1.2.4
-      arg: 5.0.2
-      sax: 1.2.4
     dev: false
 
   /slash/3.0.0:
@@ -2853,9 +2800,4 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-    dev: false
-
-  /zlib/1.0.5:
-    resolution: {integrity: sha512-40fpE2II+Cd3k8HWTWONfeKE2jL+P42iWJ1zzps5W51qcTsOUKM5Q5m2PFb0CLxlmFAaUuUdJGc3OfZy947v0w==}
-    engines: {node: '>=0.2.0'}
     dev: false

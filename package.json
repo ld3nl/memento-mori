@@ -17,17 +17,14 @@
     "eslint-config-next": "13.2.4",
     "fs": "0.0.1-security",
     "next": "13.2.4",
-    "next-sitemap": "^4.0.6",
     "react": "18.2.0",
     "react-datepicker": "^4.10.0",
     "react-dom": "18.2.0",
     "react-text-mask": "^5.5.0",
     "sass": "^1.59.3",
     "sass-loader": "^12.1.0",
-    "sitemap": "^7.1.1",
     "typescript": "5.0.2",
-    "webpack": "^5.76.2",
-    "zlib": "^1.0.5"
+    "webpack": "^5.76.2"
   },
   "devDependencies": {
     "@next/env": "^13.2.4"
