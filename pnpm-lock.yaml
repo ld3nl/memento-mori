@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@next/env': ^13.2.4
   '@types/node': 18.15.6
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
@@ -9,6 +10,7 @@ specifiers:
   eslint-config-next: 13.2.4
   fs: 0.0.1-security
   next: 13.2.4
+  next-sitemap: ^4.0.6
   react: 18.2.0
   react-datepicker: ^4.10.0
   react-dom: 18.2.0
@@ -27,6 +29,7 @@ dependencies:
   eslint-config-next: 13.2.4_j4766f7ecgqbon3u7zlxn5zszu
   fs: 0.0.1-security
   next: 13.2.4_5y7qh6ykubtj2qr2evk3di7hpa
+  next-sitemap: 4.0.6_jccvrrmb7rb3yyi3af3znueaea
   react: 18.2.0
   react-datepicker: 4.10.0_biqbaboplfbrettd7655fr4n2y
   react-dom: 18.2.0_react@18.2.0
@@ -36,6 +39,9 @@ dependencies:
   typescript: 5.0.2
   webpack: 5.76.3
 
+devDependencies:
+  '@next/env': 13.2.4
+
 packages:
 
   /@babel/runtime/7.21.0:
@@ -43,6 +49,10 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.11
+    dev: false
+
+  /@corex/deepmerge/4.0.37:
+    resolution: {integrity: sha512-PX90bEnrLdxd5e6rSFWsghExMuSw0Uov3fWJuuaoFuUQIS/446diu/4seExK5b+43L+SOBbd2uBGwYUkG1JfCw==}
     dev: false
 
   /@eslint-community/eslint-utils/4.4.0_eslint@8.36.0:
@@ -141,7 +151,6 @@ packages:
 
   /@next/env/13.2.4:
     resolution: {integrity: sha512-+Mq3TtpkeeKFZanPturjcXt+KHfKYnLlX6jMLyCrmpq6OOs4i1GqBOAauSkii9QeKCMTYzGppar21JU57b/GEA==}
-    dev: false
 
   /@next/eslint-plugin-next/13.2.4:
     resolution: {integrity: sha512-ck1lI+7r1mMJpqLNa3LJ5pxCfOB1lfJncKmRJeJxcJqcngaFwylreLP7da6Rrjr6u2gVRTfmnkSkjc80IiQCwQ==}
@@ -1934,6 +1943,20 @@ packages:
 
   /neo-async/2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
+    dev: false
+
+  /next-sitemap/4.0.6_jccvrrmb7rb3yyi3af3znueaea:
+    resolution: {integrity: sha512-pZ9tynYe6mRR189qZqcOlWVgM1Gxo07BJQW0AjerKmLwQOt+6FQMdaDgifgCt6jDT3Y3EG/+NUDDZRcd0gbPkA==}
+    engines: {node: '>=14.18'}
+    hasBin: true
+    peerDependencies:
+      '@next/env': '*'
+      next: '*'
+    dependencies:
+      '@corex/deepmerge': 4.0.37
+      '@next/env': 13.2.4
+      minimist: 1.2.8
+      next: 13.2.4_5y7qh6ykubtj2qr2evk3di7hpa
     dev: false
 
   /next/13.2.4_5y7qh6ykubtj2qr2evk3di7hpa:
