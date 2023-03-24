@@ -33,4 +33,4 @@ const generateSitemap = async () => {
   return sitemap.toString();
 };
 
-export default generateSitemap;
+module.exports = generateSitemap;
