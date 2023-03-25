@@ -17,7 +17,7 @@ const Nav: React.FunctionComponent<Props> = ({ className }) => {
     <div className={[css.nav, className || ""].join(" ")}>
       {items.map((item, index) => (
         <Link href={item?.url} key={`item-${index}`}>
-          <a>{item?.title}</a>
+          {item?.title}
         </Link>
       ))}
     </div>
