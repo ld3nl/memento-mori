@@ -19,6 +19,7 @@ interface Props {
 
 export default function Home({ data }: Props) {
   const [weeksLived, setWeeksLived] = React.useState<any>(null);
+  const [yearOfBirth, setYearOfBirth] = React.useState<any>(null);
   const [quote, setQuote] = React.useState<any>(null);
 
   React.useEffect(() => {
@@ -53,13 +54,17 @@ export default function Home({ data }: Props) {
 
       <main className={styles.main}>
         {!weeksLived && (
-          <BetterForm dateFunction={(val: any) => setWeeksLived(val.weeks)} />
+          <BetterForm
+            dateFunction={(val: any) => (
+              setWeeksLived(val.weeks), setYearOfBirth(val.year)
+            )}
+          />
         )}
         {weeksLived && (
           <LifeTable
             weeksLived={weeksLived}
             quote={quote}
-            // yearOfBirth={data?.date?.split("-")[0]}
+            yearOfBirth={yearOfBirth}
           />
         )}
       </main>

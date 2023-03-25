@@ -135,6 +135,9 @@ const BetterForm: React.FunctionComponent<Props> = ({
         onClick={() => {
           transferParam({
             weeks: weeks,
+            year:
+              startDateLocalStorage instanceof Date &&
+              startDateLocalStorage?.getFullYear(),
           });
         }}
       >
