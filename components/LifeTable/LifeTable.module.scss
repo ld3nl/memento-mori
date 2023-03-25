@@ -38,10 +38,11 @@
     min-width: 50%;
     max-width: 340px;
     margin: auto;
+    font-size: calc(var(--mm-week-padding) * 1.6);
 
     &::before {
       content: open-quote;
-      font-size: 4rem;
+      font-size: calc(var(--mm-week-padding) * 6.4);
     }
 
     &::after {
@@ -59,7 +60,7 @@
   }
 
   figcaption {
-    margin-top: 2rem;
+    margin-top: calc(var(--mm-week-padding) * 3.2);
     min-width: calc(50% + 41px);
     max-width: 340px;
     margin: auto;
