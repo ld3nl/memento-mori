@@ -40,15 +40,16 @@
 .lifeTableCell {
   position: relative;
 
-  @for $i from 1 through 52 {
-    &:nth-child(520n + #{$i}) {
-      margin-top: calc(var(--mm-week-padding) * 1.6);
-    }
-  }
-
-  // &:nth-child(520n) ~ &:nth-child(520n + 52) {
-  //   margin-top: calc(var(--mm-week-padding) * 1.6);
+  // @for $i from 1 through 52 {
+  //   &:nth-child(520n + #{$i}) {
+  //     margin-top: calc(var(--mm-week-padding) * 1.6);
+  //   }
   // }
+  // ~ &:nth-child(572n)
+
+  &:nth-child(520n) {
+    margin-bottom: calc(var(--mm-week-padding) * 1.6);
+  }
 
   &[data-year-index]::before {
     content: attr(data-year-index) " ";
