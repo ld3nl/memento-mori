@@ -3,7 +3,11 @@
 // }
 
 .lifeTableCell {
-  --mm-week-padding: 0.625rem;
+  --mm-week-padding: 0.125rem;
+
+  @media (min-width: 576px) {
+    --mm-week-padding: 0.625rem;
+  }
 
   background: white;
   /* padding: calc(var(--mm-gutter-x) / 2); */
@@ -21,7 +25,11 @@
 }
 
 .lifeTableCell:nth-child(26n) {
-  margin-right: 1rem;
+  margin-right: calc(var(--mm-week-padding) * 1.6);
+}
+
+.lifeTableCell:nth-child(52n) {
+  margin-right: calc(var(--mm-week-padding) / 2.5);
 }
 
 .lifeTableCell {
@@ -29,7 +37,7 @@
 
   @for $i from 1 through 52 {
     &:nth-child(520n + #{$i}) {
-      margin-top: 1rem;
+      margin-top: calc(var(--mm-week-padding) * 1.6);
     }
   }
 
@@ -40,11 +48,11 @@
     top: 1px;
     display: none;
   }
-  
+
   &[data-year-index="1"]::before {
     display: block;
   }
-  
+
   @for $i from 1 through 80 {
     &[data-year-index="#{$i * 5}"]::before {
       display: block;

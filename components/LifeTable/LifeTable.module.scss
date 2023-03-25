@@ -8,8 +8,14 @@
 .col {
   --mm-gutter-x: 1.5rem;
   --mm-gutter-y: 0;
-  --mm-week-padding: 0.625rem;
+  // --mm-week-padding: 0.625rem;
   --mm-font-family: "Arapey", serif;
+
+  --mm-week-padding: 0.175rem;
+
+  @media (min-width: 576px) {
+    --mm-week-padding: 0.625rem;
+  }
 
   display: flex;
   flex-wrap: wrap;
@@ -20,7 +26,7 @@
 
 .col {
   flex: 0 0 auto;
-  width: calc(var(--mm-week-padding) * 2 * 54);
+  width: calc(var(--mm-week-padding) * 2 * 53);
   margin: auto;
   max-width: 1104px;
   padding: 0 var(--mm-gutter-x);
