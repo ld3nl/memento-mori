@@ -5,13 +5,13 @@ const createSitemap = () =>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!--We manually set the two URLs we know already-->
   <url>
-    <loc>https://memento-mori-psi.vercel.app</loc>
+    <loc>https://memento-mori.vercel.app</loc>
     <lastmod>2023-03-25T10:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>         
   </url>
   <url>
-    <loc>https://memento-mori-psi.vercel.app/about</loc>
+    <loc>https://memento-mori.vercel.app/about</loc>
     <lastmod>2023-03-24T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>         

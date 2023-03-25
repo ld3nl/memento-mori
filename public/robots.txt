@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://memento-mori-psi.vercel.app/sitemap.xml
+Sitemap: https://memento-mori.vercel.app/sitemap.xml
