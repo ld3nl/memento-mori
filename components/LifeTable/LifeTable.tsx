@@ -18,7 +18,7 @@ const LifeTable: React.FunctionComponent<Props> = ({
 }) => {
   if (!weeksLived) return <>Loading...</>;
 
-  const newArr = Array.from({ length: 520 + 52 }, (_, i) => (
+  const newArr = Array.from({ length: 4160 }, (_, i) => (
     <LifeTableCell
       key={`LifeTableCell-key-${i}`}
       latestWeek={Math.trunc(weeksLived) === i && (weeksLived % 1) * 100}
