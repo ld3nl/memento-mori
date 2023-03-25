@@ -41,12 +41,21 @@
     }
   }
 
+  // &:nth-child(520n) ~ &:nth-child(520n + 52) {
+  //   margin-top: calc(var(--mm-week-padding) * 1.6);
+  // }
+
   &[data-year-index]::before {
     content: attr(data-year-index) " ";
     position: absolute;
     right: -40px;
     top: 1px;
     display: none;
+
+    font-size: 7.3333px;
+    @media (min-width: 576px) {
+      font-size: 13.3333px;
+    }
   }
 
   &[data-year-index="1"]::before {
