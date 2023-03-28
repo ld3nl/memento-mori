@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 import Link from "next/link";
 import { jsonApiClient, ApiError } from "../api/drupalApi";
 
@@ -12,18 +13,41 @@ export default function BlogHome({ articles }: Props) {
   const { id } = router.query;
 
   return (
-    <div>
-      {articles.data.map((article: any, i: number) => (
-        <Link key={`title-${i}}`} href={article.attributes.path.alias}>
-          <h1>{JSON.stringify(article.attributes.title)}</h1>
-        </Link>
-      ))}
-    </div>
+    <>
+      <Head>
+        <title>Visualize Your Life in Weeks | Unlock Your True Potential</title>
+        <meta
+          name="description"
+          content={article.data.attributes.body.summary}
+        />
+
+        <meta
+          name="keywords"
+          content="life visualization, true potential, weekly ritual, hyperawareness, Memento Mori, improved perspective, fear of failure, motivation, reflection, change, productivity"
+        />
+        <meta name="author" content="Stoic" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+        <meta
+          name="google-site-verification"
+          content="RVviQSzXUtqmgWMTl-js86aPjGV9ui3l5fepFFp-o5Q"
+        />
+      </Head>
+      <div>
+        {articles.data.map((article: any, i: number) => (
+          <Link key={`title-${i}}`} href={article.attributes.path.alias}>
+            <h1>{article.attributes.title}</h1>
+          </Link>
+        ))}
+      </div>
+    </>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async (params) => {
-  let node, articles, error, errorCode;
+  let articles, error, errorCode;
   try {
     if (!process.env.DRUPAL_API_URL) {
       throw new Error("DRUPAL_API_URL environment variable is not defined");

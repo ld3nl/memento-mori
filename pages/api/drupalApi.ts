@@ -83,6 +83,14 @@ export async function jsonApiClient(
       };
       break;
 
+    case "page":
+      url = `/jsonapi/node/page/${parameters.id}`;
+      console.log(url);
+      queryString = {
+        fields: { "node--page": "title,body" },
+      };
+      break;
+
     case "articles":
       url = `/jsonapi/node/article`;
       queryString = {

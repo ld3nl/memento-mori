@@ -10,6 +10,7 @@ type Props = {
 const Nav: React.FunctionComponent<Props> = ({ className }) => {
   const items = [
     { title: "Home", url: "/" },
+    { title: "Blog", url: "/blog" },
     { title: "About", url: "/about" },
   ];
 

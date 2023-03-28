@@ -1,5 +1,14 @@
 .nav {
-  margin: 2.5rem;
+  margin: 2.5rem 0;
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
+
+  a {
+    color: rgb(29, 29, 29);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

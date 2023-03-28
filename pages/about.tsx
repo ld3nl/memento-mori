@@ -1,21 +1,20 @@
 import React from "react";
 import Head from "next/head";
+import { GetServerSideProps } from "next";
+import useHtmlParser from "../hooks/useHtmlParser";
+import { jsonApiClient, ApiError } from "./api/drupalApi";
 import Nav from "@/components/Nav";
-// import styles from "../styles/Test.module.scss";
 
 interface Props {
-  title: string;
+  page: any;
 }
 
-const About: React.FC<Props> = ({ title }) => {
+const About: React.FC<Props> = ({ page }) => {
   return (
     <>
       <Head>
         <title>Visualize Your Life in Weeks | Unlock Your True Potential</title>
-        <meta
-          name="description"
-          content="Visualize your life in weeks and unlock your true potential with our Memento Mori Table online app. Simply enter your birth date and mark off each week. Discover the power of Memento Mori and join high-achieving individuals like Seneca, Steve Jobs, Leo Tolstoy, and Charles Darwin who used hyperawareness of their mortality to accomplish more and live better. Start your life-changing journey today."
-        />
+        <meta name="description" content={page.data.attributes.body.summary} />
 
         <meta
           name="keywords"
@@ -32,49 +31,41 @@ const About: React.FC<Props> = ({ title }) => {
         />
       </Head>
 
-      <div>
-        <h1>{title}</h1>
-        <p>
-          Welcome to the Memento Mori Table Online App, where you can visualize
-          your life in weeks and unlock your true potential with just a few
-          clicks. All you need to do is access the page and enter your birth
-          date - it&apos;s that simple.
-        </p>
+      <h1> {page.data.attributes.title}</h1>
+      {useHtmlParser(page.data.attributes.body.processed)}
 
-        <p>
-          By marking off each week on the table, you&apos;ll quickly experience
-          improved focus, a heightened perspective on life, and a rush of
-          motivation to take consistent action. This tool is designed as an
-          interactive way to help you harness the powerful concept of Memento
-          Mori, which has been used for centuries to help people focus on what
-          truly matters.
-        </p>
-
-        <p>
-          From Seneca to Steve Jobs, Leo Tolstoy to Charles Darwin, high
-          achieving individuals have used a hyperawareness of their mortality to
-          accomplish more and live better. Being aware of your mortality may
-          sound scary, but it&apos;s an extremely effective catalyst for
-          reflection and change. It puts all the things that don&apos;t matter
-          into perspective, melts away fears, and clears a path for you to focus
-          on what&apos;s truly important.
-        </p>
-
-        <p>
-          The weekly ritual of marking off a new square will jolt you into the
-          present moment, provide you with an improved perspective on life, and
-          give you the motivation and drive to take action week after week. Give
-          it a try and see how it can improve your life too!
-        </p>
-
-        <Nav />
-      </div>
+      <Nav />
     </>
   );
 };
 
-About.defaultProps = {
-  title: "About",
+export const getServerSideProps: GetServerSideProps = async (params) => {
+  let node, page, error, errorCode;
+  try {
+    if (!process.env.DRUPAL_API_URL) {
+      throw new Error("DRUPAL_API_URL environment variable is not defined");
+    }
+
+    node = await jsonApiClient(process.env.DRUPAL_API_URL, "translatePath", {
+      parameters: {
+        path: params.resolvedUrl,
+      },
+    });
+
+    page = await jsonApiClient(process.env.DRUPAL_API_URL, "page", {
+      parameters: {
+        id: node.entity.uuid,
+      },
+    });
+  } catch (e: any) {
+    error = await ApiError.errorToHumanString(e);
+    errorCode = e.status || 500;
+  }
+  return {
+    props: {
+      page,
+    },
+  };
 };
 
 export default About;
