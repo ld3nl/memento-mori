@@ -1,13 +1,12 @@
-import * as React from 'react';
+import React from "react";
 
-import HelpfulErrorPage from '../components/HelpfulErrorPage';
-
-type Props = {};
-
-const FiveHundred: React.FunctionComponent<Props> = () => {
+const Custom500 = () => {
   return (
-    <HelpfulErrorPage routerPath="/500" errorCode={500} errorContent="" />
+    <div>
+      <h1>500 - Server-side error occurred</h1>
+      <p>Sorry, something went wrong on our end. Please try again later.</p>
+    </div>
   );
 };
 
-export default FiveHundred;
+export default Custom500;

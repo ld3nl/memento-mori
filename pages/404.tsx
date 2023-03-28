@@ -1,14 +1,12 @@
-import * as React from 'react';
+import { NextPage } from "next";
 
-import HelpfulErrorPage from '../components/HelpfulErrorPage';
-
-type Props = {};
-
-const FourOhFour: React.FunctionComponent<Props> = () => {
+const Custom404: NextPage = () => {
   return (
-    <HelpfulErrorPage routerPath="/404" errorCode={404} errorContent="" />
+    <div>
+      <h1>404 - Page Not Found</h1>
+      <p>Sorry, the page you are looking for could not be found.</p>
+    </div>
   );
 };
 
-
-export default FourOhFour;
+export default Custom404;
