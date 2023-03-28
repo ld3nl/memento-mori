@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 
-
 const nextConfig = {
   reactStrictMode: true,
   cssModules: true,
@@ -11,18 +10,6 @@ const nextConfig = {
     },
   },
   webpack5: false,
-  async redirects() {
-    return [
-      {
-        source: '/(.*)',
-        destination: '/404',
-        permanent: false,
-      },
-    ];
-  },
-  devIndicators: {
-    autoPrerender: false,
-  },
 }
 
 module.exports = nextConfig
