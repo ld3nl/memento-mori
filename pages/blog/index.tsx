@@ -25,11 +25,10 @@ export default function BlogHome({ articles }: Props) {
 export const getServerSideProps: GetServerSideProps = async (params) => {
   let node, articles, error, errorCode;
   try {
-    articles = await jsonApiClient(
-      "https://dev-cms-creativeflow-agency.pantheonsite.io",
-      "articles",
-      {}
-    );
+    if (!process.env.DRUPAL_API_URL) {
+      throw new Error("DRUPAL_API_URL environment variable is not defined");
+    }
+    articles = await jsonApiClient(process.env.DRUPAL_API_URL, "articles", {});
   } catch (e: any) {
     error = await ApiError.errorToHumanString(e);
     errorCode = e.status || 500;

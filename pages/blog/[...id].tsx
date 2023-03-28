@@ -29,25 +29,21 @@ export default function DynamicBlog({ article }: Props) {
 export const getServerSideProps: GetServerSideProps = async (params) => {
   let node, article, error, errorCode;
   try {
-    node = await jsonApiClient(
-      "https://dev-cms-creativeflow-agency.pantheonsite.io",
-      "translatePath",
-      {
-        parameters: {
-          path: params.resolvedUrl,
-        },
-      }
-    );
+    if (!process.env.DRUPAL_API_URL) {
+      throw new Error("DRUPAL_API_URL environment variable is not defined");
+    }
 
-    article = await jsonApiClient(
-      "https://dev-cms-creativeflow-agency.pantheonsite.io",
-      "article",
-      {
-        parameters: {
-          id: node.entity.uuid,
-        },
-      }
-    );
+    node = await jsonApiClient(process.env.DRUPAL_API_URL, "translatePath", {
+      parameters: {
+        path: params.resolvedUrl,
+      },
+    });
+
+    article = await jsonApiClient(process.env.DRUPAL_API_URL, "article", {
+      parameters: {
+        id: node.entity.uuid,
+      },
+    });
   } catch (e: any) {
     error = await ApiError.errorToHumanString(e);
     errorCode = e.status || 500;
