@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@next/env": "^13.2.4",
-    "@types/object-hash": "^3.0.2"
+    "@types/object-hash": "^3.0.2",
+    "@types/qs": "^6.9.7"
   }
 }

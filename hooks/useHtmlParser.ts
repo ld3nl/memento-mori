@@ -6,14 +6,14 @@ interface UseHtmlParserOptions extends HTMLReactParserOptions {}
 const useHtmlParser = (
   html: string,
   options?: UseHtmlParserOptions
-): React.ReactElement => {
-  const [parsedHtml, setParsedHtml] = useState<React.ReactElement>(null);
+): React.ReactNode => {
+  const [parsedHtml, setParsedHtml] = useState<React.ReactNode>(null);
 
   useEffect(() => {
     if (html) {
       const parseOptions = options ?? {};
       const parsed = parse(html, parseOptions);
-      setParsedHtml(parsed);
+      setParsedHtml(() => parsed);
     }
   }, [html, options]);
 

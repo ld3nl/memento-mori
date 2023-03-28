@@ -111,7 +111,7 @@ export async function jsonApiClient(
 }
 
 const cachedFetch = async (
-  url,
+  url: string,
   options: ApiOptions = {},
   cacheOptions: CacheOptions = {}
 ) => {
@@ -139,7 +139,7 @@ const cachedFetch = async (
     returnValue = options.text || false ? await res.text() : await res.json();
     apiCacheMap.set(key, returnValue, cacheOptions.ttl || 60);
     return returnValue;
-  } catch (e) {
+  } catch (e: any) {
     console.error(e);
     if (e instanceof ApiError) {
       throw e;

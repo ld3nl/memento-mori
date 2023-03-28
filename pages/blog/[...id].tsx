@@ -48,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
         },
       }
     );
-  } catch (e) {
+  } catch (e: any) {
     error = await ApiError.errorToHumanString(e);
     errorCode = e.status || 500;
   }
