@@ -1,24 +1,22 @@
 import { NextPageContext } from "next";
 
-type Props = {
+interface ErrorProps {
   statusCode: number;
-};
+}
 
-const ErrorPage = ({ statusCode }: Props) => {
+function Error({ statusCode }: ErrorProps): JSX.Element {
   return (
-    <div>
-      {statusCode === 500 ? (
-        <p>Sorry, something went wrong.</p>
-      ) : (
-        <p>Sorry, this page could not be found.</p>
-      )}
-    </div>
+    <p>
+      {statusCode
+        ? `An error ${statusCode} occurred on server`
+        : "An error occurred on client"}
+    </p>
   );
-};
+}
 
-ErrorPage.getInitialProps = ({ res, err }: NextPageContext) => {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+Error.getInitialProps = ({ res, err }: NextPageContext): ErrorProps => {
+  const statusCode: any = res ? res.statusCode : err ? err.statusCode : 404;
   return { statusCode };
 };
 
-export default ErrorPage;
+export default Error;
