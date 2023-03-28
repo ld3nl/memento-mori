@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 import type { AppProps } from "next/app";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
 import { Analytics } from "@vercel/analytics/react";
-import ReactGA from "react-ga";
-ReactGA.initialize("G-GKF2PC9R54");
+import ReactGA from 'react-ga';
+ReactGA.initialize('G-GKF2PC9R54');
 
 import "../styles/globals.scss";
 
@@ -22,13 +22,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     ReactGA.pageview(router.asPath);
 
     // Track page changes after initialization
-    router.events.on("routeChangeComplete", handleRouteChange);
+    router.events.on('routeChangeComplete', handleRouteChange);
 
     // Clean up event listener
     return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
+      router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [router]);
+  }, [router]);  
   return (
     <>
       <Component {...pageProps} />
