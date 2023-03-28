@@ -84,23 +84,8 @@ const HeadMeta: React.FunctionComponent<Props> = ({
         <meta httpEquiv="expires" content="timestamp" />
 
         <link rel="preconnect" href={apiUrl()} />
-        <link rel="preconnect" href="https://s3-ap-southeast-2.amazonaws.com" />
-        <link rel="preconnect" href="https://cloud.typography.com" />
-        <link rel="preconnect" href="https://www.sl.nsw.gov.au" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
 
         <title>{fullPageTitle}</title>
-
-        <link
-          rel="shortcut icon"
-          href="https://www.sl.nsw.gov.au/sites/all/themes/slnsw_frontend/favicon.ico"
-          type="image/vnd.microsoft.icon"
-        />
 
         <meta property="og:type" content="website" />
 
@@ -119,15 +104,6 @@ const HeadMeta: React.FunctionComponent<Props> = ({
         />
 
         <meta name="dcterms.title" content={pageTitle || siteName} />
-
-        <link
-          href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cloud.typography.com/6321554/7275212/css/fonts.css"
-        />
       </Head>
       <CanonicalMeta domain={appDomain} routerPath={routerPath} />
       <MetaList metaTags={pageMeta} />
