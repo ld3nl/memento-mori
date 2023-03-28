@@ -96,7 +96,7 @@ export async function jsonApiClient(
       queryString = {
         filter: { status: "1" },
         sort: "-promote,-created",
-        fields: { "node--article": "title,path" },
+        fields: { "node--article": "title,path,changed" },
       };
       break;
 
