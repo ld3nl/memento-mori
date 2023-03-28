@@ -6,6 +6,7 @@ import Link from "next/link";
 import useHtmlParser from "../../hooks/useHtmlParser";
 
 import { jsonApiClient, ApiError } from "../api/drupalApi";
+import Nav from "@/components/Nav";
 
 interface Props {
   article: any;
@@ -44,6 +45,8 @@ export default function DynamicBlog({ article }: Props) {
         </Link>
         <h1> {article.data.attributes.title}</h1>
         {useHtmlParser(article.data.attributes.body.processed)}
+
+        <Nav />
       </div>
     </>
   );

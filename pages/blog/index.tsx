@@ -3,6 +3,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { jsonApiClient, ApiError } from "../api/drupalApi";
+import Nav from "@/components/Nav";
 
 interface Props {
   articles: any;
@@ -42,6 +43,7 @@ export default function BlogHome({ articles }: Props) {
             <h1>{article.attributes.title}</h1>
           </Link>
         ))}
+        <Nav />
       </div>
     </>
   );
