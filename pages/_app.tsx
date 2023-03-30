@@ -5,8 +5,7 @@ import type { AppProps } from "next/app";
 import { Router, useRouter } from "next/router";
 
 import { Analytics } from "@vercel/analytics/react";
-import ReactGA from "react-ga";
-ReactGA.initialize("GT-M3S9F8Q");
+import Script from "next/script";
 
 import "nprogress/nprogress.css";
 
@@ -33,27 +32,26 @@ Router.events.on("routeChangeError", () => {
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-
-  useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      ReactGA.set({ page: url });
-      ReactGA.pageview(url);
-    };
-
-    // Initialize GA on first page load
-    ReactGA.pageview(router.asPath);
-
-    // Track page changes after initialization
-    router.events.on("routeChangeComplete", handleRouteChange);
-
-    // Clean up event listener
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router]);
   return (
     <>
+      <Script
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-QZ5XN8M8D0"
+      />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', 'G-QZ5XN8M8D0', {
+                  page_path: window.location.pathname,
+                  });
+                `,
+        }}
+      />
       <Component {...pageProps} />
       <Analytics />
     </>
