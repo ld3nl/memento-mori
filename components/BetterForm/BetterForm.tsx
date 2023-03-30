@@ -92,7 +92,7 @@ const BetterForm: React.FunctionComponent<Props> = ({
           />
         </div>
       </div>
-      <div className={css.formItem}>
+      {/* <div className={css.formItem}>
         <label htmlFor="surname">Surname</label>
         <div className={css.inputControl}>
           <input
@@ -103,19 +103,15 @@ const BetterForm: React.FunctionComponent<Props> = ({
             onChange={(e) => setSurname(e.currentTarget.value)}
           />
         </div>
-      </div>
+      </div> */}
+
       <div className={css.formItem}>
         <label htmlFor="date">Date of birth</label>
         <DatePicker
           id="date"
           selected={new Date(startDateLocalStorage)}
           onChange={(date: any) => setStartDateNew(date)}
-          // locale="en-AU"
           dateFormat="dd/MM/yyyy"
-          // monthsShown={12}
-          // showYearDropdown
-          // yearDropdownItemNumber={10}
-          // scrollableYearDropdown
           type="text"
           customInput={
             <MaskedInput
