@@ -16,13 +16,12 @@ export default function BlogHome({ articles }: Props) {
   return (
     <>
       <Head>
-        <title>Visualize Your Life in Weeks | Unlock Your True Potential</title>
+        <title>Visualize Your Life in Weeks | Blog</title>
         <meta
           name="description"
           content="Unlock Your True Potential with Our Interactive Life Visualization Tool
           Looking for a powerful way to make the most of your time and unlock your true potential? Look no further than our interactive life visualization tool. Designed to help you visualize your life in weeks, this tool can provide a range of benefits, including improved focus, heightened perspective on life, and a rush of motivation to take consistent action. With each passing week, simply fill in a new square and watch as your progress grows. It's an easy and effective way to stay on track and make the most of every moment. Start visualizing your life in weeks today with our user-friendly tool."
         />
-
         <meta
           name="keywords"
           content="life visualization, true potential, weekly ritual, hyperawareness, Memento Mori, improved perspective, fear of failure, motivation, reflection, change, productivity"
@@ -39,9 +38,10 @@ export default function BlogHome({ articles }: Props) {
         />
       </Head>
       <div>
+        <h1>Blog posts</h1>
         {articles?.data?.map((article: any, i: number) => (
           <Link key={`title-${i}}`} href={article.attributes.path.alias}>
-            <h1>{article.attributes.title}</h1>
+            <h2>{article.attributes.title}</h2>
           </Link>
         ))}
         <Nav />

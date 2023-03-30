@@ -54,6 +54,25 @@ const BetterForm: React.FunctionComponent<Props> = ({
 
   return (
     <div className={[css.betterForm, className || ""].join(" ")}>
+      <div
+        style={{
+          maxWidth: 580,
+          padding: "0 1rem",
+          margin: "auto auto 2rem",
+        }}
+      >
+        <h1 style={{ textAlign: "center" }}>
+          Memento Mori App table Generator
+        </h1>
+        <p>
+          Momento Mori is a unique app that helps you reflect on the
+          preciousness of time. Simply enter your date of birth, and the app
+          generates a table showing 80 years of your life in weeks, with lived
+          weeks filled in color. This visual representation of your life's
+          timeline serves as a reminder to make the most of every moment.
+        </p>
+      </div>
+
       <div className={css.formItem}>
         <label htmlFor="name">Name</label>
         <div className={css.inputControl}>
