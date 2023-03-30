@@ -13,9 +13,6 @@ interface Props {
 }
 
 export default function DynamicBlog({ article }: Props) {
-  const router = useRouter();
-  const { id } = router.query;
-
   return (
     <>
       <Head>

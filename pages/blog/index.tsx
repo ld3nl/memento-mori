@@ -39,7 +39,7 @@ export default function BlogHome({ articles }: Props) {
         />
       </Head>
       <div>
-        {articles.data.map((article: any, i: number) => (
+        {articles?.data?.map((article: any, i: number) => (
           <Link key={`title-${i}}`} href={article.attributes.path.alias}>
             <h1>{article.attributes.title}</h1>
           </Link>

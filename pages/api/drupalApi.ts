@@ -45,6 +45,8 @@ export async function jsonApiClient(
   options.headers = options.headers || {};
   let cacheOptions: CacheOptions = {};
 
+  options.headers.Authorization = `Basic ZGVueXMuY3JlYXRpdml0eTp5dEljbHRQS1d3aGdWOFR3Q0E2MnJkTFJ2YVdwaGRCZHhPUXBvZEZuTW1DZm5FUllHd3ZpQWJJVU00RzF4bHY2`;
+
   switch (endpoint) {
     case "csrf_token":
       url = "/session/token";
