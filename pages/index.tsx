@@ -19,6 +19,7 @@ interface Props {
 
 export default function Home({ data }: Props) {
   const [weeksLived, setWeeksLived] = React.useState<any>(null);
+  const [cellColor, setCellColor] = React.useState<any>(null);
   const [yearOfBirth, setYearOfBirth] = React.useState<any>(null);
   const [quote, setQuote] = React.useState<any>(null);
 
@@ -57,7 +58,9 @@ export default function Home({ data }: Props) {
         {!weeksLived && (
           <BetterForm
             dateFunction={(val: any) => (
-              setWeeksLived(val.weeks), setYearOfBirth(val.year)
+              setWeeksLived(val.weeks),
+              setYearOfBirth(val.year),
+              setCellColor(val.cellColor)
             )}
           />
         )}
@@ -66,6 +69,7 @@ export default function Home({ data }: Props) {
             weeksLived={weeksLived}
             quote={quote}
             yearOfBirth={yearOfBirth}
+            cellColor={cellColor}
           />
         )}
       </main>

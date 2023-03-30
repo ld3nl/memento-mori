@@ -8,12 +8,14 @@ type Props = {
   weeksLived?: number;
   yearOfBirth?: string;
   quote?: any;
+  cellColor?: string;
 };
 
 const LifeTable: React.FunctionComponent<Props> = ({
   className = "",
   weeksLived = 0,
   yearOfBirth = "",
+  cellColor,
   quote,
 }) => {
   if (!weeksLived) return <>Loading...</>;
@@ -30,6 +32,7 @@ const LifeTable: React.FunctionComponent<Props> = ({
 
   var style = {
     "--partialWeek": `${(weeksLived % 1) * 100}%`,
+    "--cellColor": cellColor,
   } as React.CSSProperties;
   return (
     <>

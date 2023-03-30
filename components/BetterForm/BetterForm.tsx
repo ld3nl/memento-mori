@@ -32,6 +32,7 @@ const BetterForm: React.FunctionComponent<Props> = ({
     new Date()
   );
   const [name, setName] = useLocalStorage("name", "");
+  const [cellColor, setCellColor] = useLocalStorage("name", "#000");
   const [surname, setSurname] = useLocalStorage("surname", "");
 
   const [save, setSave] = useState(false);
@@ -44,7 +45,8 @@ const BetterForm: React.FunctionComponent<Props> = ({
       setStartDateNew(startDateLocalStorage);
       setName(name);
       setSurname(surname);
-    } else clearStorageByKeys(["name", "surname", "date"]);
+      setSurname(cellColor);
+    } else clearStorageByKeys(["name", "surname", "date", "cellColor"]);
   }, [
     name,
     setName,
@@ -52,6 +54,8 @@ const BetterForm: React.FunctionComponent<Props> = ({
     setSurname,
     startDateLocalStorage,
     surname,
+    cellColor,
+    setCellColor,
   ]);
 
   useEffect(() => {
@@ -90,6 +94,19 @@ const BetterForm: React.FunctionComponent<Props> = ({
             defaultValue={name}
             onChange={(e) => setName(e.currentTarget.value)}
           />
+        </div>
+      </div>
+
+      <div className={css.formItem}>
+        <label htmlFor="cellColor">Cell color</label>
+        <div className={css.inputControl}>
+          <input
+            type="color"
+            id="cellColor"
+            name="cellColor"
+            defaultValue={cellColor}
+            onChange={(val) => setCellColor(val.target.value)}
+          ></input>
         </div>
       </div>
       {/* <div className={css.formItem}>
@@ -147,6 +164,7 @@ const BetterForm: React.FunctionComponent<Props> = ({
           Save this for future
         </label>
       </div>
+
       <div className={css["lead"]}>
         {weeks} weeks lived
         <hr />
@@ -156,6 +174,7 @@ const BetterForm: React.FunctionComponent<Props> = ({
         className={css.cta}
         onClick={() => {
           transferParam({
+            cellColor: cellColor,
             weeks: weeks,
             year:
               startDateLocalStorage instanceof Date &&
