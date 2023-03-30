@@ -16,7 +16,9 @@ export default function DynamicBlog({ article }: Props) {
   return (
     <>
       <Head>
-        <title>Visualize Your Life in Weeks | Unlock Your True Potential</title>
+        <title>
+          Visualize Your Life in Weeks | Blog: {article.data.attributes.title}{" "}
+        </title>
         <meta
           name="description"
           content={article.data.attributes.body.summary}
@@ -41,7 +43,7 @@ export default function DynamicBlog({ article }: Props) {
         <Link href={"/blog"}>
           <button>Back</button>
         </Link>
-        <h1> {article.data.attributes.title}</h1>
+        <h1>{article.data.attributes.title}</h1>
         {useHtmlParser(article.data.attributes.body.processed)}
 
         <Nav />

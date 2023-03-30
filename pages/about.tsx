@@ -13,7 +13,9 @@ const About: React.FC<Props> = ({ page }) => {
   return (
     <>
       <Head>
-        <title>Visualize Your Life in Weeks | Unlock Your True Potential</title>
+        <title>
+          Visualize Your Life in Weeks | {page.data.attributes.title}
+        </title>
         <meta name="description" content={page.data.attributes.body.summary} />
 
         <meta
