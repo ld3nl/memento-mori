@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import NProgress from "nprogress";
-
+import localFont from "next/font/local";
 import type { AppProps } from "next/app";
 import { Router, useRouter } from "next/router";
 
@@ -10,6 +10,10 @@ import Script from "next/script";
 import "nprogress/nprogress.css";
 
 import "../styles/globals.scss";
+
+const myFontIowan = localFont({
+  src: "./fonts/iowan-old-style/iowan-old-style.woff2",
+});
 
 NProgress.configure({
   easing: "ease",
@@ -52,7 +56,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                 `,
         }}
       />
-      <Component {...pageProps} />
+      <main className={myFontIowan.className}>
+        <Component {...pageProps} />
+      </main>
       <Analytics />
     </>
   );
