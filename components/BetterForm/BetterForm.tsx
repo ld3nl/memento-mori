@@ -45,7 +45,14 @@ const BetterForm: React.FunctionComponent<Props> = ({
       setName(name);
       setSurname(surname);
     } else clearStorageByKeys(["name", "surname", "date"]);
-  }, [save]);
+  }, [
+    name,
+    setName,
+    setStartDateNew,
+    setSurname,
+    startDateLocalStorage,
+    surname,
+  ]);
 
   useEffect(() => {
     setAge(calculateAgeAndLivedWeeksAndDays(startDateLocalStorage));
@@ -68,7 +75,7 @@ const BetterForm: React.FunctionComponent<Props> = ({
           Momento Mori is a unique app that helps you reflect on the
           preciousness of time. Simply enter your date of birth, and the app
           generates a table showing 80 years of your life in weeks, with lived
-          weeks filled in color. This visual representation of your life's
+          weeks filled in color. This visual representation of your life&apos;s
           timeline serves as a reminder to make the most of every moment.
         </p>
       </div>
