@@ -6,7 +6,7 @@ import { Router, useRouter } from "next/router";
 
 import { Analytics } from "@vercel/analytics/react";
 import ReactGA from "react-ga";
-ReactGA.initialize("G-GKF2PC9R54");
+ReactGA.initialize("GT-M3S9F8Q");
 
 import "nprogress/nprogress.css";
 
