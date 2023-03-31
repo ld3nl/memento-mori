@@ -57,7 +57,7 @@
     right: calc(var(--mm-week-padding) * -4);
     top: calc(var(--mm-week-padding) / 100);
     display: none;
-
+    color: var(--cellColor);
     font-size: calc(var(--mm-week-padding) * 1.33333);
   }
 
