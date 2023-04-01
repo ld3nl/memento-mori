@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import parse, { HTMLReactParserOptions } from "html-react-parser";
 
 interface UseHtmlParserOptions extends HTMLReactParserOptions {}
@@ -7,17 +6,12 @@ const useHtmlParser = (
   html: string,
   options?: UseHtmlParserOptions
 ): React.ReactNode => {
-  const [parsedHtml, setParsedHtml] = useState<React.ReactNode>(null);
+  if (typeof html === "undefined") return;
 
-  useEffect(() => {
-    if (html) {
-      const parseOptions = options ?? {};
-      const parsed = parse(html, parseOptions);
-      setParsedHtml(() => parsed);
-    }
-  }, [html, options]);
+  const parseOptions = options ?? {};
+  const parsed = parse(html, parseOptions);
 
-  return parsedHtml;
+  return parsed;
 };
 
 export default useHtmlParser;
