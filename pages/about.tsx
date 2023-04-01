@@ -42,22 +42,14 @@ const About: React.FC<Props> = ({ page }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (params) => {
-  let node, page, error, errorCode;
+const DRUPAL_API_URL = process.env.DRUPAL_API_URL || "";
+
+export const getStaticProps = async () => {
+  let page, error, errorCode;
   try {
-    if (!process.env.DRUPAL_API_URL) {
-      throw new Error("DRUPAL_API_URL environment variable is not defined");
-    }
-
-    node = await jsonApiClient(process.env.DRUPAL_API_URL, "translatePath", {
+    page = await jsonApiClient(DRUPAL_API_URL, "page", {
       parameters: {
-        path: params.resolvedUrl,
-      },
-    });
-
-    page = await jsonApiClient(process.env.DRUPAL_API_URL, "page", {
-      parameters: {
-        id: node.entity.uuid,
+        id: "0e22c822-e2f8-4b40-8003-298c01c34cc7",
       },
     });
   } catch (e: any) {
@@ -67,7 +59,10 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
   return {
     props: {
       page,
+      error: error || null,
+      errorCode: errorCode || null,
     },
+    revalidate: 60 * 3,
   };
 };
 
