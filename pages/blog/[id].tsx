@@ -93,5 +93,5 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
     // handle the error here
   }
 
-  return { props: { article }, revalidate: 86400 };
+  return { props: { article }, revalidate: 60 };
 };
