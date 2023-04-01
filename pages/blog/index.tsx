@@ -50,13 +50,15 @@ export default function BlogHome({ articles }: Props) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (params) => {
+const DRUPAL_API_URL = process.env.DRUPAL_API_URL || "";
+
+export const getStaticProps = async () => {
   let articles, error, errorCode;
   try {
     if (!process.env.DRUPAL_API_URL) {
       throw new Error("DRUPAL_API_URL environment variable is not defined");
     }
-    articles = await jsonApiClient(process.env.DRUPAL_API_URL, "articles", {});
+    articles = await jsonApiClient(DRUPAL_API_URL, "articles", {});
   } catch (e: any) {
     error = await ApiError.errorToHumanString(e);
     errorCode = e.status || 500;
@@ -64,6 +66,9 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
   return {
     props: {
       articles,
+      error: error || null,
+      errorCode: errorCode || null,
     },
+    revalidate: 30,
   };
 };
