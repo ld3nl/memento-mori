@@ -62,7 +62,7 @@ export const getStaticProps = async () => {
       error: error || null,
       errorCode: errorCode || null,
     },
-    revalidate: 60 * 3,
+    revalidate: 60,
   };
 };
 

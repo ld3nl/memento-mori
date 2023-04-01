@@ -62,7 +62,7 @@ export default function BlogPage({ article }: Props) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(
-    "https://dev-cms-creativeflow-agency.pantheonsite.io/jsonapi/node/article"
+    "https://dev-cms-creativeflow-agency.pantheonsite.io/jsonapi/node/article?[fields][node--article]=path"
   );
   const { data: articles } = await res.json();
   const paths = articles.map((data: any) => {
