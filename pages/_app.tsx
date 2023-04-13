@@ -13,6 +13,12 @@ import "../styles/globals.scss";
 
 const myFontIowan = localFont({
   src: "./fonts/iowan-old-style/iowan-old-style.woff2",
+  variable: "--iowan-old-style",
+});
+
+const myFontIowanBold = localFont({
+  src: "./fonts/iowan-old-style/iowan-old-style-bold.woff2",
+  variable: "--iowan-old-style-bold",
 });
 
 NProgress.configure({
@@ -56,7 +62,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 `,
         }}
       />
-      <main className={myFontIowan.className}>
+      <main className={`${myFontIowan.variable} ${myFontIowanBold.variable}`}>
         <Component {...pageProps} />
       </main>
       <Analytics />

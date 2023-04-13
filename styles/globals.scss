@@ -8,6 +8,16 @@ html {
 
 body {
   min-height: 100%;
+  // color: rgb(62, 62, 62);
+  main {
+    font-family: var(--iowan-old-style);
+
+    strong {
+      font-family: var(--iowan-old-style-bold);
+      // font-weight: 900;
+      // color: black;
+    }
+  }
 }
 
 #__next {

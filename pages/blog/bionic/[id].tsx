@@ -1,7 +1,7 @@
 import { GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import useHtmlParser from "../../hooks/useHtmlParser";
+import useHtmlParser from "@/hooks/useHtmlParser";
 import Nav from "@/components/Nav";
 import { useEffect, useState } from "react";
 
@@ -18,10 +18,11 @@ interface Article {
 
 interface Props {
   article: Article;
+  bodyBionic?: string;
   path?: any;
 }
 
-export default function BlogPage({ article, path }: Props) {
+export default function BlogPage({ article, bodyBionic, path }: Props) {
   return (
     <>
       <Head>
@@ -52,12 +53,12 @@ export default function BlogPage({ article, path }: Props) {
       <div>
         <Link href={"/blog"}>
           <button>Back</button>
-        </Link>
-        <Link href={`/blog/bionic/${path}`}>
-          <button>Enable Bionic Reading</button>
+          <Link href={`/blog/${path}`}>
+            <button>Disable Bionic Reading</button>
+          </Link>
         </Link>
         <h1>{article.data.attributes.title}</h1>
-        {useHtmlParser(article.data.attributes.body?.processed || "")}
+        {useHtmlParser(bodyBionic || "")}
         <Nav />
       </div>
     </>
@@ -81,13 +82,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   let article;
+  let bodyBionic;
   let path;
+
   try {
     if (!params?.id) {
       throw new Error("params?.id is not defined");
     }
 
     path = params?.id;
+
     const res = await fetch(
       `https://dev-cms-creativeflow-agency.pantheonsite.io/router/translate-path?path=blog/${params.id}`
     );
@@ -96,9 +100,47 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
       `https://dev-cms-creativeflow-agency.pantheonsite.io/jsonapi/node/article/${data.entity.uuid}?[fields][node--article]=title,body`
     );
     article = await res2.json();
+
+    const wrapHalfOfWordsInStrong = (html: string) => {
+      // Split the HTML into tags and plain text
+      const parts = html.split(/(<[^>]*>)/);
+
+      // Map over each plain text part, wrapping half of each word in a <strong> tag
+      const wrappedParts = parts.map((part) => {
+        if (part.startsWith("<")) {
+          // This is an HTML tag, so return it unchanged
+          return part;
+        } else {
+          // This is plain text, so split it into words and wrap them
+          const words = part.split(" ");
+          const wrappedWords = words.map((word) => {
+            const wordLength = word.length;
+            const halfLength = Math.ceil(wordLength / 2);
+            const firstHalf = word.substring(0, halfLength);
+            const secondHalf = word.substring(halfLength, wordLength);
+            return `<strong>${firstHalf}</strong>${secondHalf}`;
+          });
+          return wrappedWords.join(" ");
+        }
+      });
+
+      // Join the wrapped parts back into a string
+      const wrappedHtml = wrappedParts.join("");
+
+      // Return the wrapped HTML
+      return wrappedHtml;
+    };
+
+    bodyBionic = wrapHalfOfWordsInStrong(
+      article.data.attributes.body?.processed
+    );
+
+    bodyBionic = wrapHalfOfWordsInStrong(
+      article.data.attributes.body?.processed
+    );
   } catch (error) {
     // handle the error here
   }
 
-  return { props: { article, path: path }, revalidate: 60 };
+  return { props: { article, bodyBionic, path }, revalidate: 60 };
 };
