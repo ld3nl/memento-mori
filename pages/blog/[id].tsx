@@ -53,6 +53,9 @@ export default function BlogPage({ article, path }: Props) {
         <Link href={"/blog"}>
           <button>Back</button>
         </Link>
+        <Link href={"/"}>
+          <button>Memento Mori Online Table generator</button>
+        </Link>
         <Link href={`/blog/bionic/${path}`}>
           <button>Enable Bionic Reading</button>
         </Link>
