@@ -4,7 +4,7 @@
  * @param {Date} endDate - The end date.
  * @returns {Object} An object containing the differences in years, months, and days.
  */
-function getDateDifference(startDate, endDate) {
+function getDateDifference(startDate: Date, endDate: Date) {
   let years = endDate.getFullYear() - startDate.getFullYear();
   let months = endDate.getMonth() - startDate.getMonth();
   let days = endDate.getDate() - startDate.getDate();
