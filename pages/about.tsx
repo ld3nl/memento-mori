@@ -51,15 +51,9 @@ export const getStaticProps = async () => {
   let page, error, errorCode;
 
   try {
-    // todo: fix this
-    // TypeError: Failed to parse URL from /jsonapi/node/page/0e22c822-e2f8-4b40-8003-298c01c34cc7?fields%5Bnode--page%5D=title%2Cbody
-    // case "page":
-    //   url = `/jsonapi/node/page/${parameters.id}`;
-    //   console.log(url);
-    //   queryString = {
-    //     fields: { "node--page": "title,body" },
-    //   };
-    //   break;
+    if (!process.env.DRUPAL_API_URL) {
+      throw new Error("DRUPAL_API_URL environment variable is not defined");
+    }
     page = await jsonApiClient(DRUPAL_API_URL, "page", {
       parameters: {
         id: "0e22c822-e2f8-4b40-8003-298c01c34cc7",
