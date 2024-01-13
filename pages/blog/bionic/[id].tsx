@@ -3,7 +3,6 @@ import Head from "next/head";
 import Link from "next/link";
 import useHtmlParser from "@/hooks/useHtmlParser";
 import Nav from "@/components/Nav";
-import { useEffect, useState } from "react";
 
 interface Article {
   data: {
@@ -23,6 +22,8 @@ interface Props {
 }
 
 export default function BlogPage({ article, bodyBionic, path }: Props) {
+  const parsedHtml = useHtmlParser(bodyBionic || "");
+
   return (
     <>
       <Head>
@@ -32,7 +33,7 @@ export default function BlogPage({ article, bodyBionic, path }: Props) {
         </title>
         <meta
           name="description"
-          //   content={article?.data?.attributes?.body.summary}
+          content={article?.data?.attributes?.body?.summary}
         />
 
         <meta
@@ -53,15 +54,15 @@ export default function BlogPage({ article, bodyBionic, path }: Props) {
       <div>
         <Link href={"/blog"}>
           <button>Back</button>
-          <Link href={"/"}>
-            <button>Memento Mori Online Table generator</button>
-          </Link>
-          <Link href={`/blog/${path}`}>
-            <button>Disable Bionic Reading</button>
-          </Link>
+        </Link>
+        <Link href={"/"}>
+          <button>Memento Mori Online Table generator</button>
+        </Link>
+        <Link href={`/blog/${path}`}>
+          <button>Disable Bionic Reading</button>
         </Link>
         <h1>{article.data.attributes.title}</h1>
-        {useHtmlParser(bodyBionic || "")}
+        {parsedHtml}
         <Nav />
       </div>
     </>
@@ -69,18 +70,20 @@ export default function BlogPage({ article, bodyBionic, path }: Props) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(
-    "https://dev-cms-creativeflow-agency.pantheonsite.io/jsonapi/node/article?[fields][node--article]=path"
-  );
-  const { data: articles } = await res.json();
-  const paths = articles.map((data: any) => {
-    const { attributes } = data;
-    return {
-      params: { id: attributes?.path?.alias?.replace(/^\/blog\//, "") },
-    };
-  });
-
-  return { paths, fallback: false };
+  try {
+    const res = await fetch(
+      "https://dev-cms-creativeflow-agency.pantheonsite.io/jsonapi/node/article?[fields][node--article]=path"
+    );
+    if (!res.ok) throw new Error("Failed to fetch articles");
+    const { data: articles } = await res.json();
+    const paths = articles.map((data: any) => ({
+      params: { id: data.attributes?.path?.alias?.replace(/^\/blog\//, "") },
+    }));
+    return { paths, fallback: false };
+  } catch (error) {
+    console.error("Error in getStaticPaths:", error);
+    return { paths: [], fallback: false };
+  }
 };
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
@@ -143,6 +146,8 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
     );
   } catch (error) {
     // handle the error here
+    console.error("Error in getStaticProps:", error);
+    return { notFound: true }; // Return a 404 page
   }
 
   return { props: { article, bodyBionic, path }, revalidate: 60 };
