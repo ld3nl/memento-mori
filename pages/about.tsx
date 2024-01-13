@@ -14,9 +14,12 @@ const About: React.FC<Props> = ({ page }) => {
     <>
       <Head>
         <title>
-          Visualize Your Life in Weeks | {page.data.attributes.title}
+          Visualize Your Life in Weeks | {page?.data?.attributes.title}
         </title>
-        <meta name="description" content={page.data.attributes.body.summary} />
+        <meta
+          name="description"
+          content={page?.data?.attributes.body.summary}
+        />
 
         <meta
           name="keywords"
@@ -34,8 +37,8 @@ const About: React.FC<Props> = ({ page }) => {
         />
       </Head>
 
-      <h1> {page.data.attributes.title}</h1>
-      {useHtmlParser(page.data.attributes.body.processed)}
+      <h1> {page?.data?.attributes.title}</h1>
+      {useHtmlParser(page?.data?.attributes.body.processed)}
 
       <Nav />
     </>
@@ -46,7 +49,17 @@ const DRUPAL_API_URL = process.env.DRUPAL_API_URL || "";
 
 export const getStaticProps = async () => {
   let page, error, errorCode;
+
   try {
+    // todo: fix this
+    // TypeError: Failed to parse URL from /jsonapi/node/page/0e22c822-e2f8-4b40-8003-298c01c34cc7?fields%5Bnode--page%5D=title%2Cbody
+    // case "page":
+    //   url = `/jsonapi/node/page/${parameters.id}`;
+    //   console.log(url);
+    //   queryString = {
+    //     fields: { "node--page": "title,body" },
+    //   };
+    //   break;
     page = await jsonApiClient(DRUPAL_API_URL, "page", {
       parameters: {
         id: "0e22c822-e2f8-4b40-8003-298c01c34cc7",
@@ -58,7 +71,7 @@ export const getStaticProps = async () => {
   }
   return {
     props: {
-      page,
+      page: page || null,
       error: error || null,
       errorCode: errorCode || null,
     },

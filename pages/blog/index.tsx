@@ -40,8 +40,8 @@ export default function BlogHome({ articles }: Props) {
       <div>
         <h1>Blog posts</h1>
         {articles?.data?.map((article: any, i: number) => (
-          <Link key={`title-${i}}`} href={article.attributes.path.alias}>
-            <h2>{article.attributes.title}</h2>
+          <Link key={`title-${i}}`} href={article?.attributes.path.alias}>
+            <h2>{article?.attributes.title}</h2>
           </Link>
         ))}
         <Nav />
@@ -65,7 +65,7 @@ export const getStaticProps = async () => {
   }
   return {
     props: {
-      articles,
+      articles: articles || null,
       error: error || null,
       errorCode: errorCode || null,
     },
