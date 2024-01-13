@@ -1,50 +1,43 @@
 import * as React from "react";
-
 import css from "./LifeTableCell.module.scss";
 
+// Defining TypeScript types for props to ensure type safety.
 type Props = {
   className?: string;
-  disabled?: any;
-  isActive?: any;
-  latestWeek?: any;
-  keyProp?: any;
-  year?: any;
-  fullYear?: any;
+  disabled?: boolean;
+  isActive?: boolean;
+  latestWeek?: number | boolean;
+  year?: number;
+  fullYear: number; // Making fullYear a required prop for clarity and strictness.
 };
 
 const LifeTableCell: React.FunctionComponent<Props> = ({
-  className = "",
-  disabled = false,
+  disabled = false, // Default props for controlled behavior and avoiding undefined.
   isActive = false,
   latestWeek = false,
-  keyProp = "",
   year = 0,
-  fullYear = "",
+  fullYear,
 }) => {
-  const [active, setActive] = React.useState(isActive);
-
-  // const handleActive = React.useCallback(
-  //   () => setActive((prev: any) => !prev),
-  //   []
-  // );
+  // Calculating title outside JSX for better readability and separation of concerns.
+  const isWholeYear = year % 1 === 0; // Using strict equality to check for whole year.
+  const title = isWholeYear
+    ? `${isActive ? "Your Age:" : "You Will Be"} ${year} ${
+        isActive ? "was in " : "in "
+      } ${fullYear}`
+    : "";
 
   return (
     <button
-      key={keyProp}
-      className={`${css.lifeTableCell} ${
-        latestWeek !== false ? css.latestWeek : ""
-      } ${isActive ? css.isActive : ""} ${className}`}
+      // Using array.join for dynamic className generation, enhances readability and maintainability.
+      className={[
+        css.lifeTableCell,
+        latestWeek !== false ? css.latestWeek : "",
+        isActive ? css.isActive : "",
+      ].join(" ")}
       disabled={disabled}
-      title={
-        year % 1 === 0
-          ? `${active ? "Your Age:" : "You Will Be"} ${year} ${
-              active ? "was in " : "in "
-            } ${fullYear}`
-          : ""
-      }
-      data-year-index={year % 1 === 0 ? year : ""}
-      // onClick={handleActive}
-      // style={latestWeek !== false? {background: `linear-gradient(to bottom left, cyan ${latestWeek}%, palegoldenrod ${100 - latestWeek}}%)`} : {}}
+      title={title}
+      // Conditional rendering of data attribute for semantic correctness.
+      data-year-index={isWholeYear ? year : ""}
     ></button>
   );
 };
