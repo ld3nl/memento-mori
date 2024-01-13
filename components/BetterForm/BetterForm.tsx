@@ -1,13 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
-
 import MaskedInput from "react-text-mask";
-
 import enAU from "date-fns/locale/en-AU";
 registerLocale("enAU", enAU);
 
 import { useLocalStorage, clearStorageByKeys } from "../../hooks/localStorage";
-
 import {
   calculateWeeksSinceBirth,
   calculateAgeAndLivedWeeksAndDays,
@@ -15,56 +12,77 @@ import {
 
 import css from "./BetterForm.module.scss";
 
+type DateChangeEventType = Date | null;
+
 type Props = {
   className?: string;
-  dateFunction?: Function;
+  dateFunction?: (value: any) => void;
 };
+
+const noop = () => {}; // Default no-operation function
 
 const BetterForm: React.FunctionComponent<Props> = ({
   className,
-  dateFunction,
+  dateFunction = noop,
 }) => {
-  const [age, setAge] = useState<any>();
-  const [weeks, setWeeks] = useState<any>();
+  const [age, setAge] = useState<{
+    ageLived: string;
+    livedWeeksAndDays: string;
+  }>();
 
+  const [weeks, setWeeks] = useState<number>(0);
+
+  const defaultDate = new Date();
   const [startDateLocalStorage, setStartDateNew] = useLocalStorage(
     "date",
-    new Date()
+    defaultDate
   );
+
   const [name, setName] = useLocalStorage("name", "");
-  const [cellColor, setCellColor] = useLocalStorage("name", "#000");
-  const [surname, setSurname] = useLocalStorage("surname", "");
+  const [cellColor, setCellColor] = useLocalStorage("cellColor", "#000");
 
   const [save, setSave] = useState(false);
+
+  const calculatedAge = useMemo(
+    () => calculateAgeAndLivedWeeksAndDays(startDateLocalStorage),
+    [startDateLocalStorage]
+  );
+  const calculatedWeeks = useMemo(
+    () => calculateWeeksSinceBirth(startDateLocalStorage),
+    [startDateLocalStorage]
+  );
 
   const transferParam = (value: any) =>
     dateFunction !== undefined && dateFunction(value);
 
+  // Effect for handling save functionality
   useEffect(() => {
     if (save) {
       setStartDateNew(startDateLocalStorage);
       setName(name);
-      setSurname(surname);
-      setSurname(cellColor);
-    } else clearStorageByKeys(["name", "surname", "date", "cellColor"]);
+      setCellColor(cellColor);
+    } else {
+      clearStorageByKeys(["name", "surname", "date", "cellColor"]);
+    }
   }, [
     name,
-    setName,
-    setStartDateNew,
-    setSurname,
     startDateLocalStorage,
-    surname,
     cellColor,
+    save,
+    setStartDateNew,
+    setName,
     setCellColor,
   ]);
 
+  // Effect for calculating age and weeks
   useEffect(() => {
-    setAge(calculateAgeAndLivedWeeksAndDays(startDateLocalStorage));
-    setWeeks(calculateWeeksSinceBirth(startDateLocalStorage));
-  }, [startDateLocalStorage]);
+    setAge(calculatedAge);
+    setWeeks(calculatedWeeks);
+  }, [calculatedAge, calculatedWeeks]);
 
   return (
     <div className={[css.betterForm, className || ""].join(" ")}>
+      {/* Inline styles are used here, consider moving them to BetterForm.module.scss */}
       <div
         style={{
           maxWidth: 580,
@@ -75,6 +93,7 @@ const BetterForm: React.FunctionComponent<Props> = ({
         <h1 style={{ textAlign: "center" }}>
           Memento Mori App table Generator
         </h1>
+        {/* Description for the app */}
         <p>
           Momento Mori is a unique app that helps you reflect on the
           preciousness of time. Simply enter your date of birth, and the app
@@ -84,6 +103,7 @@ const BetterForm: React.FunctionComponent<Props> = ({
         </p>
       </div>
 
+      {/* Input field for name */}
       <div className={css.formItem}>
         <label htmlFor="name">Name</label>
         <div className={css.inputControl}>
@@ -97,6 +117,7 @@ const BetterForm: React.FunctionComponent<Props> = ({
         </div>
       </div>
 
+      {/* Input field for cell color */}
       <div className={css.formItem}>
         <label htmlFor="cellColor">Cell color</label>
         <div className={css.inputControl}>
@@ -109,25 +130,18 @@ const BetterForm: React.FunctionComponent<Props> = ({
           ></input>
         </div>
       </div>
-      {/* <div className={css.formItem}>
-        <label htmlFor="surname">Surname</label>
-        <div className={css.inputControl}>
-          <input
-            className={[css["form-control"], css["form-control-lg"]].join(" ")}
-            id="surname"
-            type="text"
-            defaultValue={surname}
-            onChange={(e) => setSurname(e.currentTarget.value)}
-          />
-        </div>
-      </div> */}
 
+      {/* DatePicker for date of birth */}
       <div className={css.formItem}>
         <label htmlFor="date">Date of birth</label>
         <DatePicker
           id="date"
-          selected={new Date(startDateLocalStorage)}
-          onChange={(date: any) => setStartDateNew(date)}
+          selected={
+            startDateLocalStorage ? new Date(startDateLocalStorage) : null
+          } // Handling potential null values
+          onChange={(date: DateChangeEventType) =>
+            setStartDateNew(date || new Date())
+          } // Explicitly typed date parameter
           dateFormat="dd/MM/yyyy"
           type="text"
           customInput={
@@ -152,6 +166,7 @@ const BetterForm: React.FunctionComponent<Props> = ({
           }
         />
       </div>
+      {/* Checkbox for saving data */}
       <div className={css["form-check"]}>
         <input
           type="checkbox"
@@ -165,11 +180,13 @@ const BetterForm: React.FunctionComponent<Props> = ({
         </label>
       </div>
 
+      {/* Display of weeks lived and age */}
       <div className={css["lead"]}>
         {weeks} weeks lived
         <hr />
         {age?.ageLived ? `You are: ${age?.ageLived} young` : ""}
       </div>
+      {/* Button for generating the table */}
       <button
         className={css.cta}
         onClick={() => {
