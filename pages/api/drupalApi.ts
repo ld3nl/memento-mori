@@ -79,7 +79,7 @@ export async function jsonApiClient(
 
     case "article":
       url = `/jsonapi/node/article/${parameters.id}`;
-      console.log(url);
+      // console.log(url);
       queryString = {
         fields: { "node--article": "title,body" },
       };
@@ -87,7 +87,7 @@ export async function jsonApiClient(
 
     case "page":
       url = `/jsonapi/node/page/${parameters.id}`;
-      console.log(url);
+      // console.log(url);
       queryString = {
         fields: { "node--page": "title,body" },
       };

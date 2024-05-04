@@ -1,0 +1,98 @@
+[
+    {
+        "name": "Kurt Cobain",
+        "dob": "February 20, 1967",
+        "dod": "April 5, 1994",
+        "color": "#e07a5f"
+    },
+    {
+        "name": "Jim Morrison",
+        "dob": "December 8, 1943",
+        "dod": "July 3, 1971",
+        "color": "#e56b6f"
+    },
+    {
+        "name": "Freddie Mercury",
+        "dob": "September 5, 1946",
+        "dod": "November 24, 1991",
+        "color": "#ece4db"
+    },
+    {
+        "name": "Amy Winehouse",
+        "dob": "September 14, 1983",
+        "dod": "July 23, 2011",
+        "color": "#6e88e9"
+    },
+    {
+        "name": "John Lennon",
+        "dob": "October 9, 1940",
+        "dod": "December 8, 1980",
+        "color": "#015e54"
+    },
+    {
+        "name": "Marilyn Monroe",
+        "dob": "June 1, 1926",
+        "dod": "August 5, 1962",
+        "color": "#ffb3b3"
+    },
+    {
+        "name": "Martin Luther King",
+        "dob": "January 15, 1929",
+        "dod": "April 4, 1968",
+        "color": "#ffe0ac"
+    },
+    {
+        "name": "Osama Bin Laden",
+        "dob": "March 10, 1957",
+        "dod": "May 2, 2011",
+        "color": "#b0c4de"
+    },
+    {
+        "name": "Adolf Hitler",
+        "dob": "April 20, 1889",
+        "dod": "April 30, 1945",
+        "color": "#d3d3d3"
+    },
+    {
+        "name": "Abraham Lincoln",
+        "dob": "February 12, 1809",
+        "dod": "April 15, 1865",
+        "color": "#deb887"
+    },
+    {
+        "name": "Jimi Hendrix",
+        "dob": "November 27, 1942",
+        "dod": "September 18, 1970",
+        "color": "#800080"
+    },
+    {
+        "name": "Wolfgang Amadeus Mozart",
+        "dob": "January 27, 1756",
+        "dod": "December 5, 1791",
+        "color": "#ff6347"
+    },
+    {
+        "name": "Elvis Presley",
+        "dob": "January 8, 1935",
+        "dod": "August 16, 1977",
+        "color": "#4169e1"
+    },
+    {
+        "name": "John F. Kennedy",
+        "dob": "May 29, 1917",
+        "dod": "November 22, 1963",
+        "color": "#40e0d0"
+    },
+    {
+        "name": "Michael Jackson",
+        "dob": "August 29, 1958",
+        "dod": "June 25, 2009",
+        "color": "#f0e68c"
+    },
+    {
+        "name": "Steve Jobs",
+        "dob": "February 24, 1955",
+        "dod": "October 5, 2011",
+        "color": "#a52a2a"
+    }
+]

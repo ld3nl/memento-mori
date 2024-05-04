@@ -9,6 +9,8 @@ type Props = {
   latestWeek?: number | boolean;
   year?: number;
   fullYear: number; // Making fullYear a required prop for clarity and strictness.
+  customTitle?: string;
+  style?: React.CSSProperties;
 };
 
 const LifeTableCell: React.FunctionComponent<Props> = ({
@@ -18,6 +20,8 @@ const LifeTableCell: React.FunctionComponent<Props> = ({
   latestWeek = false,
   year = 0,
   fullYear,
+  customTitle,
+  style,
 }) => {
   // Calculating title outside JSX for better readability and separation of concerns.
   const isWholeYear = year % 1 === 0; // Using strict equality to check for whole year.
@@ -37,9 +41,10 @@ const LifeTableCell: React.FunctionComponent<Props> = ({
         className,
       ].join(" ")}
       disabled={disabled}
-      title={title}
+      title={customTitle ? customTitle : title}
       // Conditional rendering of data attribute for semantic correctness.
       data-year-index={isWholeYear ? year : ""}
+      style={style}
     ></button>
   );
 };

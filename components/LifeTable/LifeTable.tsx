@@ -9,6 +9,7 @@ type Props = {
   yearOfBirth?: string;
   quote?: any;
   cellColor?: string;
+  people?: any;
 };
 
 const LifeTable: React.FunctionComponent<Props> = ({
@@ -16,6 +17,7 @@ const LifeTable: React.FunctionComponent<Props> = ({
   yearOfBirth = "",
   cellColor,
   quote,
+  people,
 }) => {
   if (!weeksLived) return <>Loading...</>;
 
@@ -25,6 +27,15 @@ const LifeTable: React.FunctionComponent<Props> = ({
     const year = yearIndex / 52;
     const fullYear = Number(yearOfBirth) + Math.floor(year);
 
+    console.log(people.filter((val: any) => weeksLived >= val.weeks));
+
+    const person = people.filter((val: any) => val.weeks === i)[0];
+
+    const customCell = {
+      // "--partialWeek": `${(weeksLived % 1) * 100}%`,
+      "--cellColor": person?.color,
+    } as React.CSSProperties;
+
     return (
       <LifeTableCell
         key={`LifeTableCell-key-${i}`}
@@ -32,6 +43,8 @@ const LifeTable: React.FunctionComponent<Props> = ({
         isActive={weeksLived >= i}
         year={year}
         fullYear={fullYear}
+        customTitle={person?.name}
+        style={person && customCell}
       />
     );
   });

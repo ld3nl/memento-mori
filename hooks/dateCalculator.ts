@@ -5,16 +5,40 @@ import {
   differenceInWeeks,
   addYears,
   addMonths,
+  // format,
+  parse,
 } from "date-fns";
 
 /**
- * Calculates the total number of weeks lived since birth.
- * @param {Date} birthDate - The birth date.
- * @returns {number} The total number of weeks lived.
+ * Parses a date string or passes through a Date object.
+ * @param {Date | string} date - The date to parse or pass through.
+ * @returns {Date} The parsed or passed through date.
  */
-export function calculateWeeksSinceBirth(birthDate: Date): number {
-  const today = new Date();
-  return differenceInWeeks(today, birthDate);
+function parseDate(date: Date | string): Date {
+  if (typeof date === "string") {
+    // Adjusted to handle "MMMM d, yyyy" format
+    return parse(date, "MMMM d, yyyy", new Date());
+  } else {
+    return date;
+  }
+}
+
+/**
+ * Calculates the number of weeks between today and the birthDate.
+ * If a static date is provided, it will calculate the difference to that date instead.
+ *
+ * @param {Date | string} birthDate - The birth date as a Date object or string.
+ * @param {Date | string | undefined} staticToday - Optional; a static "today" date as a Date object or string.
+ * @returns {number} The total number of weeks between the dates.
+ */
+export function calculateWeeksSinceBirth(
+  birthDate: Date | string,
+  staticToday?: Date | string
+): number {
+  const parsedBirthDate = parseDate(birthDate);
+  const today = staticToday ? parseDate(staticToday) : new Date();
+
+  return differenceInWeeks(today, parsedBirthDate);
 }
 
 /**

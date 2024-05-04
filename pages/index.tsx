@@ -8,6 +8,11 @@ import LifeTable from "../components/LifeTable";
 import styles from "../styles/Home.module.scss";
 import Nav from "@/components/Nav";
 
+import {
+  calculateWeeksSinceBirth,
+  calculateAgeAndLivedWeeksAndDays,
+} from "@/hooks/dateCalculator";
+
 interface Props {
   data: [
     {
@@ -15,13 +20,17 @@ interface Props {
       author: string;
     }
   ];
+  dataPeople: [
+    { name: string; dob: string | Date; dod: string | Date; color: string }
+  ];
 }
 
-export default function Home({ data }: Props) {
+export default function Home({ data, dataPeople }: Props) {
   const [weeksLived, setWeeksLived] = React.useState<any>(null);
   const [cellColor, setCellColor] = React.useState<any>(null);
   const [yearOfBirth, setYearOfBirth] = React.useState<any>(null);
   const [quote, setQuote] = React.useState<any>(null);
+  const [people, setPeople] = React.useState<any>(null);
 
   React.useEffect(() => {
     if (data) {
@@ -29,6 +38,20 @@ export default function Home({ data }: Props) {
       setQuote(data.sort(() => 0.5 - Math.random())[randomIndex]);
     }
   }, [data]);
+
+  React.useEffect(() => {
+    if (dataPeople) {
+      setPeople(
+        dataPeople.map((val) => {
+          return {
+            weeks: calculateWeeksSinceBirth(val.dob, val.dod),
+            name: val.name,
+            color: val.color,
+          };
+        })
+      );
+    }
+  }, [dataPeople]);
 
   return (
     <div className={styles.container}>
@@ -70,6 +93,7 @@ export default function Home({ data }: Props) {
             quote={quote}
             yearOfBirth={yearOfBirth}
             cellColor={cellColor}
+            people={people}
           />
         )}
       </main>
@@ -79,14 +103,18 @@ export default function Home({ data }: Props) {
 }
 
 export async function getStaticProps() {
-  const filePath = path.join(process.cwd(), "data", "quotes.json");
+  const quotesFilePath = path.join(process.cwd(), "data", "quotes.json");
+  const peopleFilePath = path.join(process.cwd(), "data", "people.json");
 
-  const fileContents = await fs.readFile(filePath, "utf8");
+  const fileContents = await fs.readFile(quotesFilePath, "utf8");
+  const fileContentsPeople = await fs.readFile(peopleFilePath, "utf8");
 
   const data = JSON.parse(fileContents);
+  const dataPeople = JSON.parse(fileContentsPeople);
   return {
     props: {
       data,
+      dataPeople,
     },
   };
 }
