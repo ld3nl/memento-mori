@@ -1,71 +1,64 @@
+import {
+  differenceInYears,
+  differenceInMonths,
+  differenceInDays,
+  differenceInWeeks,
+  addYears,
+  addMonths,
+} from "date-fns";
+
 /**
- * Calculates the difference in years, months, and days between two dates.
- * @param {Date} startDate - The start date.
- * @param {Date} endDate - The end date.
- * @returns {Object} An object containing the differences in years, months, and days.
+ * Calculates the total number of weeks lived since birth.
+ * @param {Date} birthDate - The birth date.
+ * @returns {number} The total number of weeks lived.
  */
-function getDateDifference(startDate: Date, endDate: Date) {
-  let years = endDate.getFullYear() - startDate.getFullYear();
-  let months = endDate.getMonth() - startDate.getMonth();
-  let days = endDate.getDate() - startDate.getDate();
+export function calculateWeeksSinceBirth(birthDate: Date): number {
+  const today = new Date();
+  return differenceInWeeks(today, birthDate);
+}
 
-  // Adjust for day underflow
-  if (days < 0) {
-    months--;
-    // Calculate the number of days in the previous month
-    days += new Date(endDate.getFullYear(), endDate.getMonth(), 0).getDate();
-  }
-
-  // Adjust for month underflow
-  if (months < 0) {
-    years--;
-    months += 12;
-  }
+/**
+ * Calculates the age in full years, months, and the remainder in days.
+ * @param {Date} startDate - The birth date.
+ * @param {Date} endDate - The current date.
+ * @returns {{ years: number, months: number, days: number }} Object containing years, months, and days lived.
+ */
+function getDateDifference(
+  startDate: Date,
+  endDate: Date
+): { years: number; months: number; days: number } {
+  const years = differenceInYears(endDate, startDate);
+  const months = differenceInMonths(endDate, addYears(startDate, years));
+  const days = differenceInDays(
+    endDate,
+    addMonths(addYears(startDate, years), months)
+  );
 
   return { years, months, days };
 }
 
 /**
- * Calculates the age in years, months, weeks, and days, and the total lived weeks and days.
- * @param {Date} birthDateString - The birth date as a string.
- * @returns {Object} An object containing formatted strings for age lived and lived weeks and days.
+ * Provides a detailed age breakdown and total weeks and days lived.
+ * @param {Date | string} birthDateString - The birth date as a string or Date.
+ * @returns {{ ageLived: string; livedWeeksAndDays: string }} An object containing formatted age and total weeks and days lived.
  */
-export function calculateAgeAndLivedWeeksAndDays(birthDateString: Date): {
+export function calculateAgeAndLivedWeeksAndDays(
+  birthDateString: Date | string
+): {
   ageLived: string;
   livedWeeksAndDays: string;
 } {
-  const birthDate = new Date(birthDateString).getTime();
-  const today = new Date().getTime();
-  const { years, months, days } = getDateDifference(
-    new Date(birthDate),
-    new Date(today)
-  );
-
-  // Calculate the total number of days lived
-  const totalLivedDays = Math.floor(
-    (today - birthDate) / (1000 * 60 * 60 * 24)
-  );
-
-  return {
-    ageLived: `${years} years, ${months} months, ${Math.floor(
-      days / 7
-    )} weeks, and ${days % 7} days`,
-    livedWeeksAndDays: `${Math.floor(totalLivedDays / 7)} weeks and ${
-      totalLivedDays % 7
-    } days`,
-  };
-}
-
-/**
- * Calculates the total number of weeks lived since birth.
- * @param {Date} birthDateString - The birth date as a string.
- * @returns {number} The total number of weeks lived.
- */
-export function calculateWeeksSinceBirth(birthDateString: Date): number {
   const birthDate = new Date(birthDateString);
   const today = new Date();
   const { years, months, days } = getDateDifference(birthDate, today);
 
-  // Calculate weeks from years, months, and days
-  return years * 52 + months * 4 + Math.floor(days / 7);
+  const totalLivedDays = differenceInDays(today, birthDate);
+  const totalLivedWeeks = differenceInWeeks(today, birthDate);
+
+  return {
+    ageLived: `${years} years, ${months} months, and ${days} days`,
+    livedWeeksAndDays: `${totalLivedWeeks} weeks and ${
+      totalLivedDays % 7
+    } days`,
+  };
 }

@@ -12,7 +12,6 @@ type Props = {
 };
 
 const LifeTable: React.FunctionComponent<Props> = ({
-  className = "",
   weeksLived = 0,
   yearOfBirth = "",
   cellColor,
@@ -20,15 +19,22 @@ const LifeTable: React.FunctionComponent<Props> = ({
 }) => {
   if (!weeksLived) return <>Loading...</>;
 
-  const newArr = Array.from({ length: 4160 }, (_, i) => (
-    <LifeTableCell
-      key={`LifeTableCell-key-${i}`}
-      latestWeek={Math.trunc(weeksLived) === i && (weeksLived % 1) * 100}
-      isActive={i < weeksLived}
-      year={(i + 1) / 52}
-      fullYear={Number(yearOfBirth) + (i + 1) / 52}
-    />
-  ));
+  const newArr = Array.from({ length: 4160 }, (_, i) => {
+    // Calculate year and fullYear outside the JSX for clarity
+    const yearIndex = i + 1; // Calculate the 1-indexed year position
+    const year = yearIndex / 52;
+    const fullYear = Number(yearOfBirth) + Math.floor(year);
+
+    return (
+      <LifeTableCell
+        key={`LifeTableCell-key-${i}`}
+        latestWeek={weeksLived === i ? (weeksLived % 1) * 100 : undefined}
+        isActive={weeksLived >= i}
+        year={year}
+        fullYear={fullYear}
+      />
+    );
+  });
 
   var style = {
     "--partialWeek": `${(weeksLived % 1) * 100}%`,

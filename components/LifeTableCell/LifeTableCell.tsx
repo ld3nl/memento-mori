@@ -12,6 +12,7 @@ type Props = {
 };
 
 const LifeTableCell: React.FunctionComponent<Props> = ({
+  className,
   disabled = false, // Default props for controlled behavior and avoiding undefined.
   isActive = false,
   latestWeek = false,
@@ -33,6 +34,7 @@ const LifeTableCell: React.FunctionComponent<Props> = ({
         css.lifeTableCell,
         latestWeek !== false ? css.latestWeek : "",
         isActive ? css.isActive : "",
+        className,
       ].join(" ")}
       disabled={disabled}
       title={title}

@@ -29,20 +29,15 @@ const BetterForm: React.FunctionComponent<Props> = ({
     ageLived: string;
     livedWeeksAndDays: string;
   }>();
-
   const [weeks, setWeeks] = useState<number>(0);
-
   const defaultDate = new Date();
   const [startDateLocalStorage, setStartDateNew] = useLocalStorage(
     "date",
     defaultDate
   );
-
   const [name, setName] = useLocalStorage("name", "");
-  const [cellColor, setCellColor] = useLocalStorage("cellColor", "#000");
-
+  const [cellColor, setCellColor] = useLocalStorage("cellColor", "#000000");
   const [save, setSave] = useState(false);
-
   const calculatedAge = useMemo(
     () => calculateAgeAndLivedWeeksAndDays(startDateLocalStorage),
     [startDateLocalStorage]
